@@ -1,0 +1,46 @@
+/**
+ * Colors
+ */
+$color-black: #000;
+$color-white: #fff;
+$color-background: $color-black;
+$color-text: $color-white;
+
+/**
+ * Fonts
+ */
+$font-title: "Arial", sans-serif;
+$font-text: "Inconsolata", serif;
+
+$font-size-smaller: 10px;
+$font-size-small: 12px;
+
+$font-size-normal-small: 14px;
+$font-size-normal: 16px;
+$font-size-normal-big: 18px;
+
+$font-size-medium-small: 20px;
+$font-size-medium: 24px;
+$font-size-medium-big: 28px;
+
+$font-size-big-small: 40px;
+$font-size-big: 50px;
+$font-size-bigger: 60px;
+
+$line-height-text: 1.15;
+
+/**
+  * Screen size
+  */
+$small-screen: 500px;
+$medium-screen: 760px;
+$large-screen: 990px;
+$x-large-screen: 1200px;
+
+/**
+  * Media queries
+  */
+$mq-small-screen: "only screen and (min-width: #{$small-screen})";
+$mq-medium-screen: "only screen and (min-width: #{$medium-screen})";
+$mq-large-screen: "only screen and (min-width: #{$large-screen})";
+$mq-x-large-screen: "only screen and (min-width: #{$x-large-screen})";

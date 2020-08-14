@@ -1,0 +1,13 @@
+@import "../commons/variables";
+@import "../commons/placeholders";
+
+.container {
+  overflow: hidden;
+
+  .background {
+    position: relative;
+
+    background-size: contain;
+    background-position: top left;
+  }
+}
