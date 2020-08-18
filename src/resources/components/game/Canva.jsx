@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import * as AppPropTypes from '../../lib/PropTypes';
 
 import {
-    GAME_WIDTH, GAME_HEIGHT, PLAYER_WIDTH, MAX_ENEMIES, GAME_COLUMNS,
+    GAME_WIDTH, GAME_HEIGHT, PLAYER_WIDTH, MAX_ENEMIES, GAME_COLUMNS, PLAYER_HEIGHT,
 } from '../../lib/data';
-import backgroundImage from '../../images/starynight.png';
+// import backgroundImage from '../../images/starynight.png';
 import Player from './Player';
-import Enemy from './Enemy';
+import EnemyGenerator from './EnemyGenerator';
 
 import styles from '../../styles/game/canva.scss';
 import useInterval from '../../lib/useInterval';
@@ -23,7 +23,6 @@ const defaultProps = {
 
 const Canva = ({ className }) => {
     // const [enemies, setEnemies] = useState([]);
-    const [currentEnemyNumber, setCurrentEnemyNumber] = useState(0);
     const [playerDead, setPlayerDead] = useState(false);
 
     const gameLoop = () => {
@@ -44,21 +43,6 @@ const Canva = ({ className }) => {
         }
     };
 
-    const enemyGenerator = () => {
-        setCurrentEnemyNumber(currentEnemyNumber + 1);
-        const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        const randomDropSpeed = Math.floor(Math.random() * 250 + 500);
-
-        return (
-            <Enemy
-                spot={randomSpot}
-                dropSpeed={randomDropSpeed}
-                // gameSpeed={}
-                className={styles.enemy}
-            />
-        );
-    };
-
     // useInterval(gameLoop(), 1000);
 
     return (
@@ -74,13 +58,17 @@ const Canva = ({ className }) => {
                 alt="starry night sky background"
                 className={styles.background}
                 style={{
-                    backgroundImage: `url(${backgroundImage})`,
                     width: GAME_WIDTH,
                     height: GAME_HEIGHT,
                 }}
             >
-                <Player />
-                {currentEnemyNumber < MAX_ENEMIES ? enemyGenerator() : null}
+                <EnemyGenerator />
+                <Player
+                    className={styles.player}
+                    style={{
+                        top: GAME_HEIGHT - PLAYER_HEIGHT,
+                    }}
+                />
             </div>
         </div>
     );

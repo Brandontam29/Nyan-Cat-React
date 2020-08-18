@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
+import Header from '../partials/Header';
 import Canva from '../game/Canva';
 
 import styles from '../../styles/main/layout.scss';
@@ -25,7 +26,8 @@ const Layout = ({ className }) => (
             },
         ])}
     >
-        <Canva />
+        <Header />
+        <Canva className={styles.canva} />
     </div>
 );
 

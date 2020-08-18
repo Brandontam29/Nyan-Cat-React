@@ -3,7 +3,7 @@ import React from 'react';
 // import PropTypes from "prop-types";
 
 // import * as AppPropTypes from "../lib/PropTypes";
-// import Layout from './main/Layout';
+import Layout from './main/Layout';
 
 import '../styles/main.global.scss';
 
@@ -13,7 +13,11 @@ const defaultProps = {};
 
 // const App = () => <Layout />;
 
-const App = () => <div>I LOVE CATHERINE</div>;
+const App = () => (
+    <div>
+        <Layout />
+    </div>
+);
 
 App.propTypes = propTypes;
 App.defaultProps = defaultProps;

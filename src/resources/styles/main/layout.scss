@@ -2,5 +2,13 @@
 @import "../commons/placeholders";
 
 .container {
-  @extend %page-inner;
+    @extend %page-inner;
+    
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    .canva {
+        display: flex;
+        justify-content: center;
+    }
 }

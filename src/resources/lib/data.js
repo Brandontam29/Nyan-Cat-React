@@ -6,5 +6,4 @@ export const MAX_ENEMIES = 3;
 export const PLAYER_WIDTH = 75;
 export const PLAYER_HEIGHT = 54;
 
-
 export const GAME_COLUMNS = Math.floor(GAME_WIDTH / PLAYER_WIDTH);
