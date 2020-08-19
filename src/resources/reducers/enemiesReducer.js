@@ -6,30 +6,19 @@ const initialState = {
 };
 
 const enemiesReducer = (state = initialState, action) => {
+    console.log(state.enemiesStatus);
     switch (action.type) {
     case SET_ENEMIES_STATUS: {
         const array = state.enemiesStatus;
-        const { spot, bool } = action.paylaod;
+        const { spot, falling } = action.payload;
 
-        const newArray = [...array.slice(0, spot - 1), bool, ...array.slice(spot)];
-
+        const newArray = [...array.slice(0, spot), falling, ...array.slice(spot + 1)];
+        console.log(newArray);
         return {
             ...state,
             enemiesStatus: newArray,
         };
     }
-    // case ADD_ACTIVE_ENEMIES: {
-    //     return {
-    //         ...state,
-    //         enemiesStatus: state.enemiesStatus + action.payload,
-    //     };
-    // }
-    // case SUBSTRACT_ACTIVE_ENEMIES: {
-    //     return {
-    //         ...state,
-    //         enemiesStatus: state.enemiesStatus - action.payload,
-    //     };
-    // }
     default:
         return state;
     }

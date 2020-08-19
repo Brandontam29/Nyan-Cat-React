@@ -13,6 +13,7 @@ import styles from '../../styles/game/enemy.scss';
 
 
 const propTypes = {
+    enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number, // maybe required
     // gameSpeed: PropTypes.number, // required
@@ -29,6 +30,7 @@ const defaultProps = {
 };
 
 const Enemy = ({
+    enemiesStatus,
     spot,
     dropSpeed,
     // gameSpeed,
@@ -41,16 +43,18 @@ const Enemy = ({
 
     useEffect(() => {
         let id = 0;
-        if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT) {
+        if (enemiesStatus[spot] && top < GAME_HEIGHT + ENEMY_HEIGHT) {
             id = setTimeout(() => setTop(top + 20), dropSpeed);
             return () => clearTimeout(id);
         }
-        setEnemiesStatus(spot, false);
-        setTop(-ENEMY_HEIGHT);
+        if (enemiesStatus[spot] === true) {
+            setEnemiesStatus({ spot, falling: false });
+            setTop(-ENEMY_HEIGHT);
+        }
         return () => clearTimeout(id);
-    }, [top]);
+    }, [top, enemiesStatus]);
 
-    console.log(spot, top);
+    console.log(spot, top, falling);
     return (
         <div
             className={classNames([
