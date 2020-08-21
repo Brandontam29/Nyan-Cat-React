@@ -12,11 +12,12 @@
     }
 
     .canva {
-        margin: 0 auto 30px;
+        margin: 0 auto 15px;
     }
 
     .pauseButton {
+        font-family: $font-game;
         font-size: $font-size-normal-big;
-        padding: 5px 50px;
+        padding: 10px 30px;
     }
 }

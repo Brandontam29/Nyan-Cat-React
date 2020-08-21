@@ -27,10 +27,22 @@ module.exports = {
                     loader: 'url-loader',
                 },
             },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[path][name].[ext]',
+                            outputPath: 'fonts/',
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx', '.scss', '.sass', '.jpg', '.png'],
+        extensions: ['*', '.js', '.jsx', '.scss', '.sass', '.jpg', '.png', '.ttf', '.eot'],
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
