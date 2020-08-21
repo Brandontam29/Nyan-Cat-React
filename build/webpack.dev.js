@@ -14,7 +14,7 @@ module.exports = {
                         loader: 'css-loader',
                         options: {
                             modules: {
-                                localIdentName: '[path]-[name]-[local]',
+                                localIdentName: '[name]-[local]',
                             },
                         },
                     },

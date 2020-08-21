@@ -2,14 +2,12 @@
 @import "../commons/placeholders";
 
 .container {
-  overflow: hidden;
-
-  .background {
+    display: block;
     position: relative;
+    overflow: hidden;
 
     background-image: url(../../images/starynight.png);
     background-size: cover;
     background-position: top left;
     background-repeat: no-repeat;
-  }
 }

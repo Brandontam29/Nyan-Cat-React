@@ -6,14 +6,12 @@ const initialState = {
 };
 
 const enemiesReducer = (state = initialState, action) => {
-    console.log(state.enemiesStatus);
     switch (action.type) {
     case SET_ENEMIES_STATUS: {
         const array = state.enemiesStatus;
         const { spot, falling } = action.payload;
 
         const newArray = [...array.slice(0, spot), falling, ...array.slice(spot + 1)];
-        console.log(newArray);
         return {
             ...state,
             enemiesStatus: newArray,

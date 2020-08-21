@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 // import PropTypes from "prop-types";
 
@@ -11,12 +10,8 @@ const propTypes = {};
 
 const defaultProps = {};
 
-// const App = () => <Layout />;
-
 const App = () => (
-    <div>
-        <Layout />
-    </div>
+    <Layout />
 );
 
 App.propTypes = propTypes;

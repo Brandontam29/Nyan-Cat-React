@@ -13,6 +13,7 @@ import styles from '../../styles/game/enemy.scss';
 
 
 const propTypes = {
+    pause: PropTypes.bool,
     enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number, // maybe required
@@ -24,39 +25,40 @@ const propTypes = {
 };
 
 const defaultProps = {
+    pause: false,
     dropSpeed: 20,
     // gameSpeed: 1,
     className: null,
 };
 
 const Enemy = ({
+    pause,
     enemiesStatus,
     spot,
     dropSpeed,
-    // gameSpeed,
     falling,
     setEnemiesStatus,
-    // subtractActiveEnemies,
     className,
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
 
     useEffect(() => {
         let id = 0;
-        if (enemiesStatus[spot] && top < GAME_HEIGHT + ENEMY_HEIGHT) {
-            id = setTimeout(() => setTop(top + 20), dropSpeed);
+        if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
+            id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
         }
-        if (enemiesStatus[spot] === true) {
+        if (falling === true && !pause) {
             setEnemiesStatus({ spot, falling: false });
             setTop(-ENEMY_HEIGHT);
         }
         return () => clearTimeout(id);
     }, [top, enemiesStatus]);
 
-    console.log(spot, top, falling);
     return (
-        <div
+        <img
+            src={enemyImage}
+            alt="Falling Nyan Cat"
             className={classNames([
                 styles.container,
                 {
@@ -64,13 +66,7 @@ const Enemy = ({
                 },
             ])}
             style={{ top, left: spot * ENEMY_WIDTH }}
-        >
-            <img
-                src={enemyImage}
-                alt="Falling Nyan Cat"
-                className={styles.image}
-            />
-        </div>
+        />
     );
 };
 

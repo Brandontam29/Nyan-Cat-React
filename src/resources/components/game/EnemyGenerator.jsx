@@ -1,9 +1,9 @@
 /* eslint-disable no-bitwise */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import { connect } from 'react-redux';
-import uuid from 'uuid-random';
+// import uuid from 'uuid-random';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import {
@@ -16,38 +16,34 @@ import {
 import { findTrues } from '../../lib/utils';
 import Enemy from './Enemy';
 
-import styles from '../../styles/game/canva.scss';
+import styles from '../../styles/game/enemy-generator.scss';
 
 const propTypes = {
+    pause: PropTypes.bool,
     enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
     level: PropTypes.number,
-    className: AppPropTypes.className,
 };
 
 const defaultProps = {
-    level: 1,
-    className: null,
+    pause: false,
+    level: 10,
 };
 
 const EnemyGenerator = ({
+    pause,
     enemiesStatus,
     setEnemiesStatus,
     level,
-    className,
 }) => {
-    // const [enemiesStats, setEnemiesStats] = useState(new Array(GAME_COLUMNS)
-    //     .fill({ id: 'same key', dropSpeed: 750 }));
-    // const [enemyStat, setEnemyStat] = useState();
+    const [speed, setSpeed] = useState([150, 150, 150, 150, 150]);
 
     const activateEnemy = () => {
-        const dropSpeed = Math.floor(Math.random() * 40);
+        const dropSpeed = Math.floor(Math.random() * -15);
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        const randomDropSpeed = dropSpeed + 500 - 30 * level;
-        console.log('enemy generated', randomSpot, randomDropSpeed);
+        const randomDropSpeed = dropSpeed + 150 - 7 * level;
 
-
-        // setEnemiesStats(enemiesStats);
+        setSpeed([...speed.slice(0, randomSpot), randomDropSpeed, ...speed.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
 
@@ -57,15 +53,15 @@ const EnemyGenerator = ({
             activateEnemy();
         }
     }, [enemiesStatus]);
-
     const createEnemies = () => {
         const enemies = [];
         for (let i = 0; i < GAME_COLUMNS; i += 1) {
             enemies.push(
                 <Enemy
+                    pause={pause}
                     falling={enemiesStatus[i]}
                     spot={i}
-                    dropSpeed={25}
+                    dropSpeed={speed[i]}
                     className={styles.enemy}
                 />,
             );
@@ -73,18 +69,7 @@ const EnemyGenerator = ({
         return enemies;
     };
 
-    return (
-        <div
-            className={classNames([
-                styles.container,
-                {
-                    [className]: className !== null,
-                },
-            ])}
-        >
-            {createEnemies()}
-        </div>
-    );
+    return createEnemies();
 };
 
 EnemyGenerator.propTypes = propTypes;
