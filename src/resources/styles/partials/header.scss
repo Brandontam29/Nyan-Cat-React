@@ -2,5 +2,17 @@
 @import "../commons/placeholders";
 
 .container {
+    .heading {
+        margin-bottom: 20px;
 
+        h1 {
+            font-size: $font-size-medium-small;
+        }
+    }
+
+    .paragraph {
+        h3 {
+            font-size: $font-size-normal-big;
+        }
+    }
 }

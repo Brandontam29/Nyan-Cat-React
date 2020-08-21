@@ -7,10 +7,16 @@
     margin-top: 50px;
     margin-bottom: 50px;
 
-    .canva {
-        // display: flex;
-        // justify-content: center;
+    .header {
+        margin-bottom: 30px;
+    }
 
-        margin: auto;
+    .canva {
+        margin: 0 auto 30px;
+    }
+
+    .pauseButton {
+        font-size: $font-size-normal-big;
+        padding: 5px 50px;
     }
 }

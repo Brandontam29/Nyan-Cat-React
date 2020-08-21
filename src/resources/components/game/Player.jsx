@@ -37,8 +37,8 @@ const Player = ({ pause, className }) => {
         }
     };
 
-    useKeyPress('a', pause ? null : moveLeft);
-    useKeyPress('d', pause ? null : moveRight);
+    useKeyPress('a', pause ? () => {} : moveLeft);
+    useKeyPress('d', pause ? () => {} : moveRight);
 
     return (
         <img

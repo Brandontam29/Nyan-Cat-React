@@ -3,14 +3,16 @@
  */
 @import "commons/variables";
 @import "commons/placeholders";
-// @import "commons/fonts";
+@import "commons/fonts";
 @import "commons/reset";
 @import "commons/general";
 
 body {
-  background: $color-background;
-  color: $color-text;
-  font-family: $font-text;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: antialiased;
+    background: $color-background;
+    color: $color-text;
+    font-family: $font-text;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased;
+
+    text-rendering: optimizeLegibility;
 }

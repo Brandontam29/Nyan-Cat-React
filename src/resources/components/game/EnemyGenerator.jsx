@@ -36,7 +36,7 @@ const EnemyGenerator = ({
     setEnemiesStatus,
     level,
 }) => {
-    const [speed, setSpeed] = useState([150, 150, 150, 150, 150]);
+    const [speed, setSpeed] = useState(new Array(GAME_COLUMNS).fill(1000));
 
     const activateEnemy = () => {
         const dropSpeed = Math.floor(Math.random() * -15);
@@ -53,11 +53,13 @@ const EnemyGenerator = ({
             activateEnemy();
         }
     }, [enemiesStatus]);
+
     const createEnemies = () => {
         const enemies = [];
         for (let i = 0; i < GAME_COLUMNS; i += 1) {
             enemies.push(
                 <Enemy
+                    // key={uuid()}
                     pause={pause}
                     falling={enemiesStatus[i]}
                     spot={i}

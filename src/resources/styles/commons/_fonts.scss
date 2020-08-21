@@ -1,0 +1,23 @@
+$fonts-path: "../../fonts" !default;
+
+@font-face {
+    font-family: "Inconsolata-Light";
+    src: url("#{$fonts-path}/Inconsolata-Light.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Inconsolata-Regular";
+    src: url("#{$fonts-path}/Inconsolata-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Inconsolata-SemiBold";
+    src: url("#{$fonts-path}/Inconsolata-SemiBold.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Inconsolata-Bold";
+    src: url("#{$fonts-path}/Inconsolata-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Visitor";
+    src: url("#{$fonts-path}/Visitor.ttf") format("truetype");
+}

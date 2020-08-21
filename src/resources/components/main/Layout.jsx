@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -18,7 +18,21 @@ const defaultProps = {
 };
 
 const Layout = ({ className }) => {
-    const canvasRef = useRef(null);
+    const pauseTime = useRef(0);
+    const [pause, setPause] = useState(true);
+    const [disablePause, setDisablePause] = useState(false);
+
+
+    const addPauseCount = () => {
+        pauseTime.current += 1;
+    };
+
+
+    useEffect(() => {
+        if (pauseTime.current >= 6) {
+            setDisablePause(true);
+        }
+    }, [pause]);
 
 
     return (
@@ -30,8 +44,24 @@ const Layout = ({ className }) => {
                 },
             ])}
         >
-            <Header />
-            <Canvas ref={canvasRef} className={styles.canva} />
+            <Header className={styles.header} />
+            <Canvas pause={pause} className={styles.canva} />
+            <button
+                type="button"
+                onClick={() => {
+                    addPauseCount();
+                    setPause(!pause);
+                }}
+                disabled={disablePause}
+                className={classNames([
+                    styles.pauseButton,
+                    {
+                        [styles.disabledPause]: disablePause,
+                    },
+                ])}
+            >
+                Pause
+            </button>
         </div>
     );
 };

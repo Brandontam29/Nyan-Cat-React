@@ -10,7 +10,7 @@ import {
 import Player from './Player';
 import EnemyGenerator from './EnemyGenerator';
 
-import styles from '../../styles/game/canva.scss';
+import styles from '../../styles/game/canvas.scss';
 
 const propTypes = {
     pause: PropTypes.bool,
@@ -18,7 +18,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-    pause: false,
+    pause: true,
     className: null,
 };
 
@@ -45,6 +45,7 @@ const Canvas = ({ pause, className }) => {
                     top: GAME_HEIGHT - PLAYER_HEIGHT,
                 }}
             />
+            { pause ? <div className={styles.dimOverlay}>Paused</div> : null}
         </div>
 
     );

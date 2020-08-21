@@ -52,8 +52,9 @@ const Enemy = ({
             setEnemiesStatus({ spot, falling: false });
             setTop(-ENEMY_HEIGHT);
         }
+
         return () => clearTimeout(id);
-    }, [top, enemiesStatus]);
+    }, [top, enemiesStatus, pause]);
 
     return (
         <img

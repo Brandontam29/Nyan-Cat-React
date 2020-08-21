@@ -23,13 +23,14 @@ const Header = ({ className }) => (
             },
         ])}
     >
-        <h1>Burgerino vs Nyan Cat</h1>
-        <span>
-            Nyan cats across the galaxy coming to feast on you.
-            Dodge them for as long as you can. How long can you survive?
-        </span>
-
-        <div>
+        <div className={styles.heading}>
+            <h1>Burgerino vs Nyan Cat</h1>
+            <span>
+                Nyan cats across the galaxy coming to feast on you.
+                Dodge them for as long as you can. How long can you survive?
+            </span>
+        </div>
+        <div className={styles.paragraph}>
             <h3>How to Play</h3>
             <span>use your arrow keys to move</span>
         </div>
