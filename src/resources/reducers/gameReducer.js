@@ -1,11 +1,11 @@
-import { SELECTION_MODE } from '../actions/siteActions';
+import { SELECTION_MODE } from '../actions/gameActions';
 
 
 const initialState = {
     selectionMode: false,
 };
 
-const siteReducer = (state = initialState, action) => {
+const gameReducer = (state = initialState, action) => {
     switch (action.type) {
     case SELECTION_MODE: {
         return {
@@ -18,4 +18,4 @@ const siteReducer = (state = initialState, action) => {
     }
 };
 
-export default siteReducer;
+export default gameReducer;

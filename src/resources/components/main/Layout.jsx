@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import * as AppPropTypes from '../../lib/PropTypes';
+import { GAME_WIDTH, GAME_HEIGHT } from '../../lib/data';
 
 import Header from '../partials/Header';
 import Canvas from '../game/Canvas';
@@ -18,22 +19,20 @@ const defaultProps = {
 };
 
 const Layout = ({ className }) => {
-    const pauseTime = useRef(0);
-    const [pause, setPause] = useState(true);
+    const [pause, setPause] = useState(false);
+    const [pauseCount, setPauseCount] = useState(3);
     const [disablePause, setDisablePause] = useState(false);
 
 
-    const addPauseCount = () => {
-        pauseTime.current += 1;
-    };
-
-
-    useEffect(() => {
-        if (pauseTime.current >= 6) {
+    const onPauseClick = () => {
+        if (!pause) {
+            setPauseCount(pauseCount - 1);
+        }
+        if (pauseCount === 0) {
             setDisablePause(true);
         }
-    }, [pause]);
-
+        return setPause(!pause);
+    };
 
     return (
         <div
@@ -45,23 +44,29 @@ const Layout = ({ className }) => {
             ])}
         >
             <Header className={styles.header} />
-            <Canvas pause={pause} className={styles.canva} />
-            <button
-                type="button"
-                onClick={() => {
-                    addPauseCount();
-                    setPause(!pause);
+            <Canvas pause={pause} className={styles.canvas} />
+            <div
+                className={styles.gameOptions}
+                style={{
+                    width: GAME_WIDTH,
+
                 }}
-                disabled={disablePause}
-                className={classNames([
-                    styles.pauseButton,
-                    {
-                        [styles.disabledPause]: disablePause,
-                    },
-                ])}
             >
-                Pause
-            </button>
+                <button
+                    type="button"
+                    onClick={onPauseClick}
+                    disabled={disablePause}
+                    className={classNames([
+                        styles.pauseButton,
+                        {
+                            [styles.isActive]: pause,
+                            [styles.isDisabled]: disablePause,
+                        },
+                    ])}
+                >
+                    {pause ? 'Play' : `Pause (${pauseCount})` }
+                </button>
+            </div>
         </div>
     );
 };

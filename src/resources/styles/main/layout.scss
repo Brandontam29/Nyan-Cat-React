@@ -11,13 +11,31 @@
         margin-bottom: 30px;
     }
 
-    .canva {
+    .canvas {
+        margin: 0 auto 15px;
+    }
+
+    .gameOptions {
         margin: 0 auto 15px;
     }
 
     .pauseButton {
+        @extend %reset-button;
+
         font-family: $font-game;
-        font-size: $font-size-normal-big;
+        font-size: $font-size-medium;
         padding: 10px 30px;
+
+        border: 1px solid;
+        border-color: inherit;
+        border-radius: 3px;
+    }
+
+    .isActive {
+        padding: 10px 52px;
+    }
+
+    .isDisabled {
+        color: #888;
     }
 }

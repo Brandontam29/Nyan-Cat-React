@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
-import siteReducer from './siteReducer';
+import gameReducer from './gameReducer';
+import playerReducer from './playerReducer';
 import enemiesReducer from './enemiesReducer';
 import loginReducer from './loginReducer';
 
 export default combineReducers({
-    site: siteReducer,
+    game: gameReducer,
+    player: playerReducer,
     enemies: enemiesReducer,
     login: loginReducer,
 });

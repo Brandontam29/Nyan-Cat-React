@@ -14,7 +14,7 @@ import styles from '../../styles/game/enemy.scss';
 
 const propTypes = {
     pause: PropTypes.bool,
-    enemiesStatus: AppPropTypes.enemyStatus.isRequired,
+    // enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number, // maybe required
     // gameSpeed: PropTypes.number, // required
@@ -33,7 +33,7 @@ const defaultProps = {
 
 const Enemy = ({
     pause,
-    enemiesStatus,
+    // enemiesStatus,
     spot,
     dropSpeed,
     falling,
@@ -53,8 +53,9 @@ const Enemy = ({
             setTop(-ENEMY_HEIGHT);
         }
 
+
         return () => clearTimeout(id);
-    }, [top, enemiesStatus, pause]);
+    }, [top, falling, pause]);
 
     return (
         <img
@@ -74,8 +75,8 @@ const Enemy = ({
 Enemy.propTypes = propTypes;
 Enemy.defaultProps = defaultProps;
 
-const WithReduxContainer = connect(({ enemies }) => ({
-    enemiesStatus: enemies.enemiesStatus,
+const WithReduxContainer = connect(({ player }) => ({
+    playerPosition: player.position,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
 }))(Enemy);
