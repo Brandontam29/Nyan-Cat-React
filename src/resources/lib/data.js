@@ -1,5 +1,5 @@
 export const GAME_WIDTH = 375;
-export const GAME_HEIGHT = 500;
+export const GAME_HEIGHT = 650;
 export const ENEMY_WIDTH = 75;
 export const ENEMY_HEIGHT = 156;
 export const MAX_ENEMIES = 3;

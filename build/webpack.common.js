@@ -15,17 +15,28 @@ module.exports = {
             },
             {
                 test: /\.html$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                    },
-                ],
+                use: [{
+                    loader: 'html-loader',
+                }],
             },
             {
-                test: /\.(jpg|png)$/,
-                use: {
-                    loader: 'url-loader',
-                },
+                test: /\.(jpe?g|png|gif)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                    // options: {
+                    //     limit: 10240,
+                    // },
+                    },
+                    // {
+                    //     loader: 'file-loader',
+                    //     options: {
+                    //         name: '[name].[ext]',
+                    //         outputPath: 'images/',
+                    //     },
+                    // },
+                ],
+
             },
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -53,7 +64,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../', 'dist'),
         publicPath: '/',
-        filename: 'bundle.js',
+        filename: '[name].[contenthash].js',
     },
     devServer: {
         open: true,

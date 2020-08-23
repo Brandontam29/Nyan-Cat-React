@@ -32,7 +32,7 @@ const Header = ({ className }) => (
         </div>
         <div className={styles.paragraph}>
             <h3>How to Play</h3>
-            <span>use your arrow keys to move</span>
+            <span>use the A and D key to move</span>
         </div>
     </div>
 );
