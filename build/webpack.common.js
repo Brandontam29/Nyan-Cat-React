@@ -22,19 +22,19 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif)$/,
                 use: [
-                    {
-                        loader: 'url-loader',
-                    // options: {
-                    //     limit: 10240,
-                    // },
-                    },
                     // {
-                    //     loader: 'file-loader',
+                    //     loader: 'url-loader',
                     //     options: {
-                    //         name: '[name].[ext]',
-                    //         outputPath: 'images/',
+                    //         limit: 10240,
                     //     },
                     // },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/',
+                        },
+                    },
                 ],
 
             },
@@ -63,7 +63,7 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, '../', 'dist'),
-        publicPath: '/',
+        publicPath: './',
         filename: '[name].[contenthash].js',
     },
     devServer: {
