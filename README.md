@@ -1,5 +1,5 @@
 # Burgerino vs Nyan Cat #
-Play as Burgerino to evade the famished Nyan Cats.
+Play as Burgerino to evade the famished Nyan Cats.\
 Try it now: https://relaxed-williams-b01bbd.netlify.app/
 
 
@@ -11,7 +11,7 @@ This project is as strictly front-end project built from scratch. It is mobile a
 React, Webpack, Sass
 
 ##### React #####
-Well, React is "React". But, this game is built to have players easily adjust the parameters. For that to happen the app has to be structured smartly. Not only that, the website is optimzed for speed and low memory usage.
+Well, React is "React". But, this game is built to have players easily adjust the parameters. For that to happen the app has to be structured smartly.
 
 ##### Webpack #####
 The webpack configuration is completely custom built from scratch for this project. To name a few, it features code splitting, lazy loading, file compression, css optimization/injection.
@@ -20,10 +20,12 @@ The webpack configuration is completely custom built from scratch for this proje
 This is where the magic of responsiveness happens. With the custom webpack configuration it is possible to have injected Sass into component tags.
 
 ### Note on game development ###
-I know this game does not particularly call for game UX/UI design, but that has always peeked my interest. That is why in this game there are small elements of it found although they are hard to notice. 
+I know this game does not particularly call for game UX/UI design, but that has always peeked my interest as I have worked as a play tester.
 
 ##### Example 1 #####
-Notice hwo the Nyan Cat has a rainbow following it. Originally there was a hitbox on it, but it proved frustrating to our play testers. The main reason is that the rainbow has a fadded opacity design which gives out a feeling that the rainbow is **NOT** "part" of the Nyan Cat.
+**Problem**: Notice how the Nyan Cat has a rainbow following it. Originally there was a hitbox on it, but it proved frustrating to our play testers.\
+**Reason**: The rainbow has a fadded opacity design which gives out a feeling that the rainbow is **NOT** "part" of the Nyan Cat.\
+**Solution**: Remove the hitbox instead of solidifying the rainbow since it will make the game easier and prettier.
 
 ### Play locally ###
 
