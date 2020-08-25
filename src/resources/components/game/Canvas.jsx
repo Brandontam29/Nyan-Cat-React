@@ -13,6 +13,7 @@ import EnemyGenerator from './EnemyGenerator';
 import styles from '../../styles/game/canvas.scss';
 
 const propTypes = {
+    gameOver: PropTypes.bool.isRequired,
     pause: PropTypes.bool,
     className: AppPropTypes.className,
 };
@@ -22,7 +23,7 @@ const defaultProps = {
     className: null,
 };
 
-const Canvas = ({ pause, className }) => {
+const Canvas = ({ gameOver, pause, className }) => {
     return (
         <div
             alt="starry night sky background"
@@ -45,7 +46,16 @@ const Canvas = ({ pause, className }) => {
                     top: GAME_HEIGHT - PLAYER_HEIGHT,
                 }}
             />
-            { pause ? <div className={styles.dimOverlay}>Paused</div> : null}
+            { pause && !gameOver ? (
+                <div className={styles.overlayDim}>
+                    <div className={styles.overlayText}>Paused</div>
+                </div>
+            ) : null}
+            { gameOver ? (
+                <div className={styles.overlayDim}>
+                    <div className={styles.overlayText}>GAME OVER</div>
+                </div>
+            ) : null}
         </div>
 
     );

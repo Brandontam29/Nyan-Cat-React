@@ -1,0 +1,13 @@
+@import "../commons/variables";
+@import "../commons/placeholders";
+
+.container {
+    display: flex;
+    flex-direction: row;
+
+    width: 50%;
+
+    .hamburger {
+        height: 38px;
+    }
+}

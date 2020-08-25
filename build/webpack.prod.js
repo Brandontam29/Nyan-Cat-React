@@ -1,10 +1,16 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     mode: 'production',
     devtool: 'source-map',
+    output: {
+        path: path.resolve(__dirname, '../', 'dist'),
+        publicPath: './',
+        filename: '[name].[contenthash].js',
+    },
     plugins: [
         new CleanWebpackPlugin(),
     ],

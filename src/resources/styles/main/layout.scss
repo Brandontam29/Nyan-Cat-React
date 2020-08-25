@@ -16,26 +16,34 @@
     }
 
     .gameOptions {
+        display: flex;
+        flex-direction: row;
         margin: 0 auto 15px;
     }
 
     .pauseButton {
         @extend %reset-button;
-
-        font-family: $font-game;
-        font-size: $font-size-medium;
-        padding: 10px 30px;
+        width: 50%;
+        margin-right: 10px;
+        padding: 10px 0;
 
         border: 1px solid;
         border-color: inherit;
         border-radius: 3px;
-    }
 
-    .isActive {
-        padding: 10px 52px;
-    }
+        font-family: $font-game;
+        font-size: $font-size-medium;
 
-    .isDisabled {
-        color: #888;
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:disabled {
+            color: #888;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0);
+            }
+        }
     }
 }

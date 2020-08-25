@@ -1,8 +1,9 @@
-import { SET_PLAYER_POSITION } from '../actions/playerActions';
-import { GAME_COLUMNS } from '../lib/data';
+import { SET_PLAYER_POSITION, CALCULATE_PLAYER_HEALTH } from '../actions/playerActions';
+import { GAME_COLUMNS, STARTING_HEALTH } from '../lib/data';
 
 const initialState = {
     position: Math.floor(GAME_COLUMNS / 2),
+    health: STARTING_HEALTH,
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -13,6 +14,13 @@ const playerReducer = (state = initialState, action) => {
             position: action.payload,
         };
     }
+    case CALCULATE_PLAYER_HEALTH: {
+        return {
+            ...state,
+            health: state.health + action.payload,
+        };
+    }
+
     default:
         return state;
     }

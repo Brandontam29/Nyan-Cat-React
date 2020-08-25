@@ -5,10 +5,14 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
-import { ENEMY_WIDTH, ENEMY_HEIGHT, GAME_HEIGHT } from '../../lib/data';
+import {
+    ENEMY_WIDTH, ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT,
+} from '../../lib/data';
 import { setEnemiesStatus as setEnemiesStatusAction } from '../../actions/enemiesActions';
+import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
 
 import enemyImage from '../../images/enemy.png';
+
 import styles from '../../styles/game/enemy.scss';
 
 
@@ -20,7 +24,10 @@ const propTypes = {
     // gameSpeed: PropTypes.number, // required
     falling: PropTypes.bool.isRequired,
     // subtractActiveEnemies: PropTypes.func.isRequired,
+    calculatePlayerHealth: PropTypes.func.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
+    playerHealth: PropTypes.number.isRequired,
+    playerPosition: PropTypes.number.isRequired,
     className: AppPropTypes.className,
 };
 
@@ -37,19 +44,29 @@ const Enemy = ({
     spot,
     dropSpeed,
     falling,
+    calculatePlayerHealth,
     setEnemiesStatus,
+    playerHealth,
+    playerPosition,
     className,
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
+    const [touched, setTouched] = useState(false);
 
     useEffect(() => {
         let id = 0;
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
+            if (!touched && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT + 10 && playerPosition === spot) {
+                setTouched(true);
+                calculatePlayerHealth(-1);
+                console.log('touched');
+            }
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
         }
-        if (falling === true && !pause) {
+        if (falling && !pause) {
             setEnemiesStatus({ spot, falling: false });
+            setTouched(false);
             setTop(-ENEMY_HEIGHT);
         }
 
@@ -77,8 +94,10 @@ Enemy.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ player }) => ({
     playerPosition: player.position,
+    playerHealth: player.health,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
+    calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),
 }))(Enemy);
 
 export default WithReduxContainer;
