@@ -12,7 +12,7 @@
         "react/jsx-indent": ["error", 4],
         "react/jsx-indent-props": ["error", 4],
         "no-console": ["error", { "allow": ["warn", "error"] }],
-        
+
         "max-len": ["error", 120],
         "arrow-body-style": ["off", "always"],
         "linebreak-style": ["error", "windows"]

@@ -2,17 +2,19 @@
 @import "../commons/placeholders";
 
 .container {
-    .heading {
-        margin-bottom: 20px;
+    div {
+        margin-bottom: 15px;
 
-        h1 {
-            font-size: $font-size-medium-small;
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 
-    .paragraph {
-        h3 {
-            font-size: $font-size-normal-big;
-        }
+    h1 {
+        font-size: $font-size-medium-small;
+    }
+
+    h3 {
+        font-size: $font-size-normal-big;
     }
 }

@@ -27,7 +27,7 @@ const propTypes = {
     // subtractActiveEnemies: PropTypes.func.isRequired,
     calculatePlayerHealth: PropTypes.func.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
-    playerHealth: PropTypes.number.isRequired,
+    // playerHealth: PropTypes.number.isRequired,
     playerPosition: PropTypes.number.isRequired,
     className: AppPropTypes.className,
 };
@@ -48,20 +48,15 @@ const Enemy = ({
     falling,
     calculatePlayerHealth,
     setEnemiesStatus,
-    playerHealth,
+    // playerHealth,
     playerPosition,
     className,
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
     const [touched, setTouched] = useState(false);
-    console.log(gameOver);
+
     useEffect(() => {
         let id = 0;
-        if (gameOver) {
-            setEnemiesStatus({ spot, falling: false });
-            setTop(-ENEMY_HEIGHT);
-            return () => clearTimeout(id);
-        }
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
             if (!touched && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT + 10 && playerPosition === spot) {
                 setTouched(true);
@@ -70,15 +65,22 @@ const Enemy = ({
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
         }
+
         if (falling && !pause) {
             setEnemiesStatus({ spot, falling: false });
             setTouched(false);
             setTop(-ENEMY_HEIGHT);
         }
 
-
         return () => clearTimeout(id);
     }, [top, falling, pause, gameOver]);
+
+    useEffect(() => {
+        if (gameOver) {
+            setEnemiesStatus({ spot, falling: false });
+            setTop(-ENEMY_HEIGHT);
+        }
+    }, [gameOver]);
 
     return (
         <img
@@ -100,7 +102,7 @@ Enemy.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ player }) => ({
     playerPosition: player.position,
-    playerHealth: player.health,
+    // playerHealth: player.health,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
     calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),

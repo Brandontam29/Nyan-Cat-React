@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
@@ -35,14 +36,12 @@ const HamburgerIcon = ({
         viewBox="0 0 512 512"
         xmlSpace="preserve"
         className={className}
-
         {...props}
     >
         <polygon
             fill={breadColor}
             points="478.609,133.565 445.217,133.565 445.217,100.174 411.826,100.174 411.826,66.783
-    378.435,66.783 378.435,33.391 133.565,33.391 133.565,66.783 100.174,66.783 100.174,100.174 66.783,100.174 66.783,133.565
-	33.391,133.565 33.391,445.217 66.783,445.217 66.783,478.609 445.217,478.609 445.217,445.217 478.609,445.217 "
+    378.435,66.783 378.435,33.391 133.565,33.391 133.565,66.783 100.174,66.783 100.174,100.174 66.783,100.174 66.783,133.565 33.391,133.565 33.391,445.217 66.783,445.217 66.783,478.609 445.217,478.609 445.217,445.217 478.609,445.217 "
         />
         <polygon
             fill={meatColor}
@@ -64,9 +63,7 @@ const HamburgerIcon = ({
     </svg>
 );
 
-
 HamburgerIcon.propTypes = propTypes;
 HamburgerIcon.defaultProps = defaultProps;
-
 
 export default HamburgerIcon;

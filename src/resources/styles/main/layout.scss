@@ -2,48 +2,25 @@
 @import "../commons/placeholders";
 
 .container {
-    @extend %page-inner;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
     .header {
-        margin-bottom: 30px;
+        @extend %page-inner;
+
+        margin-bottom: 20px;
     }
 
-    .canvas {
-        margin: 0 auto 15px;
+    .game {
+        margin-bottom: 20px;
     }
 
-    .gameOptions {
-        display: flex;
-        flex-direction: row;
-        margin: 0 auto 15px;
-    }
+    @media #{$mq-small-screen} {
+        margin-top: 50px;
+        margin-bottom: 50px;
 
-    .pauseButton {
-        @extend %reset-button;
-        width: 50%;
-        margin-right: 10px;
-        padding: 10px 0;
-
-        border: 1px solid;
-        border-color: inherit;
-        border-radius: 3px;
-
-        font-family: $font-game;
-        font-size: $font-size-medium;
-
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        &:disabled {
-            color: #888;
-
-            &:hover {
-                background-color: rgba(0, 0, 0, 0);
-            }
+        .header {
+            margin-bottom: 30px;
         }
     }
 }
