@@ -20,6 +20,7 @@ import styles from '../../styles/game/enemy-generator.scss';
 
 const propTypes = {
     pause: PropTypes.bool,
+    gameOver: PropTypes.bool.isRequired,
     enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
     level: PropTypes.number,
@@ -32,6 +33,7 @@ const defaultProps = {
 
 const EnemyGenerator = ({
     pause,
+    gameOver,
     enemiesStatus,
     setEnemiesStatus,
     level,
@@ -49,10 +51,10 @@ const EnemyGenerator = ({
 
     useEffect(() => {
         const activeEnemies = findTrues(enemiesStatus);
-        if (activeEnemies < MAX_ENEMIES) {
+        if (activeEnemies < MAX_ENEMIES && !gameOver) {
             activateEnemy();
         }
-    }, [enemiesStatus]);
+    }, [enemiesStatus, gameOver]);
 
     const createEnemies = () => {
         const enemies = [];
@@ -61,6 +63,7 @@ const EnemyGenerator = ({
                 <Enemy
                     // key={uuid()}
                     pause={pause}
+                    gameOver={gameOver}
                     falling={enemiesStatus[i]}
                     spot={i}
                     dropSpeed={speed[i]}

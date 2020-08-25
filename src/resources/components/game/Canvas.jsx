@@ -38,7 +38,7 @@ const Canvas = ({ gameOver, pause, className }) => {
                 height: GAME_HEIGHT,
             }}
         >
-            <EnemyGenerator pause={pause} />
+            <EnemyGenerator gameOver={gameOver} pause={pause} />
             <Player
                 pause={pause}
                 className={styles.player}

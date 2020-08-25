@@ -17,6 +17,7 @@ import styles from '../../styles/game/enemy.scss';
 
 
 const propTypes = {
+    gameOver: PropTypes.bool.isRequired,
     pause: PropTypes.bool,
     // enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     spot: PropTypes.number.isRequired,
@@ -39,6 +40,7 @@ const defaultProps = {
 };
 
 const Enemy = ({
+    gameOver,
     pause,
     // enemiesStatus,
     spot,
@@ -52,14 +54,18 @@ const Enemy = ({
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
     const [touched, setTouched] = useState(false);
-
+    console.log(gameOver);
     useEffect(() => {
         let id = 0;
+        if (gameOver) {
+            setEnemiesStatus({ spot, falling: false });
+            setTop(-ENEMY_HEIGHT);
+            return () => clearTimeout(id);
+        }
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
             if (!touched && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT + 10 && playerPosition === spot) {
                 setTouched(true);
                 calculatePlayerHealth(-1);
-                console.log('touched');
             }
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
@@ -72,7 +78,7 @@ const Enemy = ({
 
 
         return () => clearTimeout(id);
-    }, [top, falling, pause]);
+    }, [top, falling, pause, gameOver]);
 
     return (
         <img
