@@ -54,17 +54,24 @@ const Enemy = ({
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
     const [touched, setTouched] = useState(false);
-
+    useEffect(() => {
+        console.log(GAME_HEIGHT - ENEMY_HEIGHT * (2 / 3), top, GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT);
+        console.log(GAME_HEIGHT - ENEMY_HEIGHT * (2 / 3) > top && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT);
+    }, [top]);
     useEffect(() => {
         let id = 0;
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
-            if (!touched && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT + 10 && playerPosition === spot) {
+            if (!touched
+                && GAME_HEIGHT - ENEMY_HEIGHT * (2 / 3) > top
+                && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT
+                && playerPosition === spot) {
                 setTouched(true);
                 calculatePlayerHealth(-1);
             }
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
         }
+
 
         if (falling && !pause) {
             setEnemiesStatus({ spot, falling: false });

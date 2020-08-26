@@ -28,4 +28,31 @@
             font-family: $font-game;
         }
     }
+
+    .touchButton {
+        @extend %reset-button;
+
+        position: absolute;
+        border-style: dotted;
+        border-color: #fff;
+    }
+
+    .leftButton {
+        width: 50%;
+        height: 30%;
+
+        top: 70%;
+        left: 0;
+        border-width: 1px 1px 0 0;
+    }
+
+    .rightButton {
+        width: 50%;
+        height: 30%;
+
+        top: 70%;
+        left: 50%;
+
+        border-width: 1px 0 0;
+    }
 }

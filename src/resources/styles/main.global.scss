@@ -10,7 +10,9 @@
 body {
     background: $color-background;
     color: $color-text;
+
     font-family: $font-text;
+    font-size: $font-size-normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: antialiased;
 
