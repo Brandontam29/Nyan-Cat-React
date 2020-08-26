@@ -66,6 +66,8 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         }
         return `Pause (${pauseCount})`;
     };
+
+    console.log(playerHealth);
     return (
         <div
             className={classNames([
@@ -76,7 +78,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
             ])}
             style={{ maxWidth: GAME_WIDTH }}
         >
-            <Canvas gameOver={gameOver} pause={pause} className={styles.canvas} />
+            <Canvas playerHealth={playerHealth} gameOver={gameOver} pause={pause} className={styles.canvas} />
             <div className={styles.gameOptions}>
                 <button
                     type="button"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
@@ -15,10 +15,14 @@ import { setPlayerPosition as setPlayerPositionAction } from '../../actions/play
 import starynight from '../../images/starynight.png';
 import Player from './Player';
 import EnemyGenerator from './EnemyGenerator';
+import HealthBar from './HealthBar';
+import Maximize from '../icons/Maximize';
+import Minimize from '../icons/Minimize';
 
 import styles from '../../styles/game/canvas.scss';
 
 const propTypes = {
+    playerHealth: PropTypes.number.isRequired,
     gameOver: PropTypes.bool.isRequired,
     pause: PropTypes.bool,
     playerPosition: PropTypes.number.isRequired,
@@ -32,13 +36,15 @@ const defaultProps = {
 };
 
 const Canvas = ({
-    gameOver, pause, playerPosition, setPlayerPosition, className,
+    playerHealth, gameOver, pause, playerPosition, setPlayerPosition, className,
 }) => {
+    const [fullScreen, setFullScreen] = useState(false);
     const toggleFullScreen = () => {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen();
+            document.documentElement.requestFullscreen(); setFullScreen(true);
         } else if (document.exitFullscreen) {
             document.exitFullscreen();
+            setFullScreen(true);
         }
     };
 
@@ -77,6 +83,8 @@ const Canvas = ({
                     top: `${PLAYER_HEIGHT / (GAME_HEIGHT * 100)}%`,
                 }}
             />
+
+            <HealthBar health={playerHealth} className={styles.healthBar} />
             { pause && !gameOver ? (
                 <div className={styles.overlayDim}>
                     <div className={styles.overlayText}>Paused</div>
@@ -87,6 +95,15 @@ const Canvas = ({
                     <div className={styles.overlayText}>Game Over</div>
                 </div>
             ) : null}
+            <button
+                type="button"
+                onClick={toggleFullScreen}
+                className={classNames([styles.touchButton, styles.fullScreen])}
+            >
+                {fullScreen
+                    ? <Minimize className={styles.fullScreenButton} />
+                    : <Maximize className={styles.fullScreenButton} />}
+            </button>
             <button
                 type="button"
                 onClick={moveLeft}

@@ -2,10 +2,12 @@
 @import "../commons/placeholders";
 
 .container {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
 
+    height: 38px;
+
     .hamburger {
-        height: 38px;
+        height: 100%;
     }
 }

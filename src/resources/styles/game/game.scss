@@ -6,7 +6,7 @@
     font-family: $font-game;
 
     .canvas {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .gameOptions {
@@ -48,7 +48,7 @@
 
     @media #{$mq-small-screen} {
         .canvas {
-            margin-bottom: 30px;
+            // margin-bottom: 15px;
         }
 
         .gameOptions {
