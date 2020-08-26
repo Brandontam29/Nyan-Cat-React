@@ -74,7 +74,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
                     [className]: className !== null,
                 },
             ])}
-            style={{ width: GAME_WIDTH }}
+            style={{ maxWidth: GAME_WIDTH }}
         >
             <Canvas gameOver={gameOver} pause={pause} className={styles.canvas} />
             <div className={styles.gameOptions}>

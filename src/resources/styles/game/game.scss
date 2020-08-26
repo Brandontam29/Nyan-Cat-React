@@ -12,7 +12,7 @@
     .gameOptions {
         display: flex;
         flex-direction: row;
-        margin: 0 auto 15px;
+        margin: 0 10px 15px;
     }
 
     .pauseButton {
@@ -49,6 +49,11 @@
     @media #{$mq-small-screen} {
         .canvas {
             margin-bottom: 30px;
+        }
+
+        .gameOptions {
+            margin-left: 0;
+            margin-right: 0;
         }
     }
 }

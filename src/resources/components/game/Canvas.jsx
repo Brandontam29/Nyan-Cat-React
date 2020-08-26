@@ -12,6 +12,7 @@ import useKeyPress from '../../lib/useKeyPress';
 
 import { setPlayerPosition as setPlayerPositionAction } from '../../actions/playerActions';
 
+import starynight from '../../images/starynight.png';
 import Player from './Player';
 import EnemyGenerator from './EnemyGenerator';
 
@@ -56,7 +57,6 @@ const Canvas = ({
     useKeyPress('f', toggleFullScreen);
     return (
         <div
-            alt="starry night sky background"
             className={classNames([
                 styles.container,
                 {
@@ -64,16 +64,17 @@ const Canvas = ({
                 },
             ])}
             style={{
-                width: GAME_WIDTH,
-                height: GAME_HEIGHT,
+                maxWidth: GAME_WIDTH,
+                maxHeight: GAME_HEIGHT,
             }}
         >
+            <img src={starynight} alt="starry night sky background" className={styles.staryNight} />
             <EnemyGenerator gameOver={gameOver} pause={pause} />
             <Player
                 pause={pause}
                 className={styles.player}
                 style={{
-                    top: GAME_HEIGHT - PLAYER_HEIGHT,
+                    top: `${PLAYER_HEIGHT / (GAME_HEIGHT * 100)}%`,
                 }}
             />
             { pause && !gameOver ? (
@@ -83,7 +84,7 @@ const Canvas = ({
             ) : null}
             { gameOver ? (
                 <div className={styles.overlayDim}>
-                    <div className={styles.overlayText}>GAME OVER</div>
+                    <div className={styles.overlayText}>Game Over</div>
                 </div>
             ) : null}
             <button

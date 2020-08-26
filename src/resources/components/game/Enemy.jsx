@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import {
-    ENEMY_WIDTH, ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT,
+    ENEMY_WIDTH, ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
 } from '../../lib/data';
 import { setEnemiesStatus as setEnemiesStatusAction } from '../../actions/enemiesActions';
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
@@ -95,7 +95,11 @@ const Enemy = ({
                     [className]: className !== null,
                 },
             ])}
-            style={{ top, left: spot * ENEMY_WIDTH }}
+            style={{
+                width: `${(1 / GAME_COLUMNS) * 100}%`,
+                top,
+                left: `${spot * (1 / GAME_COLUMNS) * 100}%`,
+            }}
         />
     );
 };

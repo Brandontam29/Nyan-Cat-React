@@ -9,29 +9,24 @@
 }
 
 %page-inner {
-    margin: 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 
     @media #{$mq-small-screen} {
-        margin: 0 20px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
 
     @media #{$mq-large-screen} {
         max-width: 960px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
-%page-inner-small {
-    @extend %page-inner;
-
-    @media #{$mq-medium-screen} {
-        max-width: 640px;
-        margin: 0 auto;
-    }
-
-    @media #{$mq-large-screen} {
-        max-width: 640px;
-    }
+%image {
+    display: block;
+    max-width: 100%;
 }
 
 /**

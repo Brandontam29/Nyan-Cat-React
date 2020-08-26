@@ -55,8 +55,9 @@ const Player = ({
                 },
             ])}
             style={{
-                left: playerPosition * PLAYER_WIDTH,
-                top: GAME_HEIGHT - PLAYER_HEIGHT,
+                width: `${(1 / GAME_COLUMNS) * 100}%`,
+                left: `${playerPosition * (1 / GAME_COLUMNS) * 100}%`,
+                top: `${((GAME_HEIGHT - PLAYER_HEIGHT) / GAME_HEIGHT) * 100}%`,
             }}
         />
     );

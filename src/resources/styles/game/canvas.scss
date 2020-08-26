@@ -6,26 +6,21 @@
     position: relative;
     overflow: hidden;
 
-    background-image: url(../../images/starynight.png);
-    background-size: cover;
-    background-position: top left;
-    background-repeat: no-repeat;
+    .staryNight {
+        @extend %image;
+    }
 
     .overlayDim {
-        position: relative;
+        @extend %fullscreen;
+
         display: flex;
         justify-content: center;
         align-items: center;
 
-        width: 100%;
-        height: 100%;
-
         background-color: rgba(0, 0, 0, 0.25);
 
         .overlayText {
-            color: #fff;
             font-size: $font-size-big-small;
-            font-family: $font-game;
         }
     }
 
