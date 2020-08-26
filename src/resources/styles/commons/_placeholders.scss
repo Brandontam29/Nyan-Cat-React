@@ -17,10 +17,14 @@
         margin-right: 20px;
     }
 
-    @media #{$mq-large-screen} {
-        max-width: 960px;
+    @media #{$mq-medium-screen} {
+        max-width: 720px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    @media #{$mq-large-screen} {
+        max-width: 960px;
     }
 }
 
@@ -42,6 +46,13 @@
     font-family: inherit;
     cursor: pointer;
     appearance: none;
+    user-select: none;
+
+    &:focus {
+        user-select: none;
+        outline: none;
+        box-shadow: none;
+    }
 }
 
 %reset-input {

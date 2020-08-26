@@ -21,7 +21,6 @@ const defaultProps = {
 };
 
 const HealthBar = ({ health, className }) => {
-    console.log(health);
     const createHealthBar = () => {
         const healthBar = [];
         for (let i = 0; i < health; i += 1) {
