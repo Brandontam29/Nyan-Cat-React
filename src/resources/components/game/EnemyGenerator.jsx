@@ -38,12 +38,12 @@ const EnemyGenerator = ({
     setEnemiesStatus,
     level,
 }) => {
-    const [speed, setSpeed] = useState(new Array(GAME_COLUMNS).fill(1000));
+    const [speed, setSpeed] = useState(new Array(GAME_COLUMNS).fill(150));
 
     const activateEnemy = () => {
-        const dropSpeed = Math.floor(Math.random() * -15);
+        const dropSpeed = Math.floor(Math.random() * -20);
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        const randomDropSpeed = dropSpeed + 150 - 7 * level;
+        const randomDropSpeed = dropSpeed + 170 - 7 * level;
 
         setSpeed([...speed.slice(0, randomSpot), randomDropSpeed, ...speed.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });

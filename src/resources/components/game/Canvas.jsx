@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import * as AppPropTypes from '../../lib/PropTypes';
 
 import {
-    GAME_WIDTH, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
+    GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
 } from '../../lib/data';
 import useKeyPress from '../../lib/useKeyPress';
 
@@ -24,6 +24,7 @@ import styles from '../../styles/game/canvas.scss';
 const propTypes = {
     playerHealth: PropTypes.number.isRequired,
     gameOver: PropTypes.bool.isRequired,
+    level: PropTypes.number,
     pause: PropTypes.bool,
     playerPosition: PropTypes.number.isRequired,
     setPlayerPosition: PropTypes.func.isRequired,
@@ -31,20 +32,22 @@ const propTypes = {
 };
 
 const defaultProps = {
+    level: 4,
     pause: true,
     className: null,
 };
 
 const Canvas = ({
-    playerHealth, gameOver, pause, playerPosition, setPlayerPosition, className,
+    playerHealth, gameOver, level, pause, playerPosition, setPlayerPosition, className,
 }) => {
     const [fullScreen, setFullScreen] = useState(false);
     const toggleFullScreen = () => {
         if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen(); setFullScreen(true);
+            document.documentElement.requestFullscreen();
+            setFullScreen(true);
         } else if (document.exitFullscreen) {
             document.exitFullscreen();
-            setFullScreen(true);
+            setFullScreen(false);
         }
     };
 
@@ -70,20 +73,20 @@ const Canvas = ({
                 },
             ])}
             style={{
-                maxWidth: GAME_WIDTH,
                 maxHeight: GAME_HEIGHT,
             }}
         >
             <img src={starynight} alt="starry night sky background" className={styles.staryNight} />
-            <EnemyGenerator gameOver={gameOver} pause={pause} />
+            <EnemyGenerator level={level} gameOver={gameOver} pause={pause} />
             <Player
-                pause={pause}
                 className={styles.player}
                 style={{
                     top: `${PLAYER_HEIGHT / (GAME_HEIGHT * 100)}%`,
                 }}
             />
-
+            <div className={styles.topBar}>
+                {`Level ${level}`}
+            </div>
             <HealthBar health={playerHealth} className={styles.healthBar} />
             { pause && !gameOver ? (
                 <div className={styles.overlayDim}>

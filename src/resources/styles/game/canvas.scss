@@ -10,10 +10,19 @@
         @extend %image;
     }
 
+    .topBar {
+        position: absolute;
+
+        top: 0;
+        left: 40%;
+
+        padding: 5px;
+    }
+
     .healthBar {
         position: absolute;
 
-        height: 20px;
+        height: 24px;
 
         top: 0;
         right: 0;
@@ -50,6 +59,7 @@
         .fullScreenButton {
             height: 20px;
             padding: 5px;
+            stroke-width: 3px;
         }
     }
 

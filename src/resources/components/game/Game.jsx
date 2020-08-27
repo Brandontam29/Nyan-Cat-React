@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import { GAME_WIDTH, STARTING_HEALTH } from '../../lib/data';
+import usekeyPress from '../../lib/useKeyPress';
 
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
 
@@ -24,6 +25,7 @@ const defaultProps = {
 };
 
 const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
+    const [level, setLevel] = useState(0);
     const [pause, setPause] = useState(false);
     const [pauseCount, setPauseCount] = useState(3);
     const [disablePause, setDisablePause] = useState(false);
@@ -49,6 +51,19 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
     };
 
     useEffect(() => {
+        let id = 0;
+        if (!pause && !gameOver) {
+            id = setTimeout(() => setLevel(level + 1), 7 * 1000);
+            return () => clearTimeout(id);
+        }
+        if (gameOver) {
+            setLevel(0);
+        }
+
+        return () => clearTimeout(id);
+    }, [level, pause, gameOver]);
+
+    useEffect(() => {
         if (playerHealth === 0) {
             setPause(true);
             setDisablePause(true);
@@ -67,7 +82,8 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         return `Pause (${pauseCount})`;
     };
 
-    console.log(playerHealth);
+    usekeyPress(' ', buttonClick);
+
     return (
         <div
             className={classNames([
@@ -76,9 +92,17 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
                     [className]: className !== null,
                 },
             ])}
-            style={{ maxWidth: GAME_WIDTH }}
+            style={{
+                maxWidth: GAME_WIDTH,
+            }}
         >
-            <Canvas playerHealth={playerHealth} gameOver={gameOver} pause={pause} className={styles.canvas} />
+            <Canvas
+                playerHealth={playerHealth}
+                gameOver={gameOver}
+                level={level}
+                pause={pause}
+                className={styles.canvas}
+            />
             <div className={styles.gameOptions}>
                 <button
                     type="button"
