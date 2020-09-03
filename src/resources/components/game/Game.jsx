@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import { GAME_WIDTH, STARTING_HEALTH } from '../../lib/data';
-import usekeyPress from '../../lib/useKeyPress';
+import useKeyPress from '../../hooks/useKeyPress';
 
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
 
@@ -30,24 +30,33 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
     const [pauseCount, setPauseCount] = useState(3);
     const [disablePause, setDisablePause] = useState(false);
 
+    const [starting, setStarting] = useState(false);
     const [gameOver, setGameOver] = useState(false);
 
 
-    const buttonClick = () => {
-        if (gameOver === false) {
-            if (!pause) {
-                setPauseCount(pauseCount - 1);
+    const pausePlay = () => {
+        if (!gameOver) {
+            if (!disablePause) {
+                if (!pause) {
+                    setPauseCount(pauseCount - 1);
+                }
+                if (pauseCount === 0) {
+                    setDisablePause(true);
+                }
+                return setPause(!pause);
             }
-            if (pauseCount === 0) {
-                setDisablePause(true);
-            }
-            return setPause(!pause);
+            return;
         }
-        setPauseCount(3);
-        setPause(false);
-        setDisablePause(false);
-        calculatePlayerHealth(-playerHealth + STARTING_HEALTH);
-        return setGameOver(false);
+
+        setStarting(true);
+        return setTimeout(() => {
+            setStarting(false);
+            setPauseCount(3);
+            setPause(false);
+            setDisablePause(false);
+            calculatePlayerHealth(-playerHealth + STARTING_HEALTH);
+            return setGameOver(false);
+        }, 3000);
     };
 
     useEffect(() => {
@@ -82,8 +91,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         return `Pause (${pauseCount})`;
     };
 
-    usekeyPress(' ', buttonClick);
-
+    // useKeyPress(' ', pausePlay);
     return (
         <div
             className={classNames([
@@ -98,7 +106,9 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         >
             <Canvas
                 playerHealth={playerHealth}
+                playButton={pausePlay}
                 gameOver={gameOver}
+                starting={starting}
                 level={level}
                 pause={pause}
                 className={styles.canvas}
@@ -106,7 +116,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
             <div className={styles.gameOptions}>
                 <button
                     type="button"
-                    onClick={buttonClick}
+                    onClick={pausePlay}
                     disabled={disablePause && !gameOver}
                     className={styles.pauseButton}
                 >

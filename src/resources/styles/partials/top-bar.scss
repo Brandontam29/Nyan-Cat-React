@@ -1,0 +1,35 @@
+@import "../commons/variables";
+@import "../commons/placeholders";
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    padding: 5px 8px;
+
+    .fullScreenButton {
+        @extend %reset-button;
+
+        z-index: 5;
+
+        width: 22px;
+        stroke-width: 3px;
+
+        .icon {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .level {
+        flex-grow: 1;
+
+        margin-left: 70px;
+        text-align: center;
+    }
+
+    .healthBar {
+        height: 24px;
+    }
+}

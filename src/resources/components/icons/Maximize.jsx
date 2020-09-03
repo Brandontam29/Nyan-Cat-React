@@ -4,7 +4,7 @@ import React from 'react';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
-// import styles from '../../styles/main/Maximize.scss';
+// import styles from '../../styles/main/MaximizeIcon.scss';
 
 const propTypes = {
     className: AppPropTypes.className,
@@ -14,7 +14,7 @@ const defaultProps = {
     className: null,
 };
 
-const Maximize = ({ className }) => (
+const MaximizeIcon = ({ className }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -31,7 +31,7 @@ const Maximize = ({ className }) => (
     </svg>
 );
 
-Maximize.propTypes = propTypes;
-Maximize.defaultProps = defaultProps;
+MaximizeIcon.propTypes = propTypes;
+MaximizeIcon.defaultProps = defaultProps;
 
-export default Maximize;
+export default MaximizeIcon;

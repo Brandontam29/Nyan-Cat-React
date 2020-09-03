@@ -63,12 +63,13 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx', '.scss', '.sass', '.jpg', '.png', '.ttf', '.eot'],
+        extensions: ['*', '.js', '.jsx', '.scss', '.sass', '.jpg', '.png', '.ttf', '.eot', '.svg'],
     },
     plugins: [
         new CaseSensitivePathsPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            fileName: 'index.html',
+            template: './public/index.html',
         }),
     ],
     // output: {
@@ -80,6 +81,6 @@ module.exports = {
         open: true,
         hot: true,
         port: 3030,
-        contentBase: '../dist',
+        contentBase: 'dist',
     },
 };

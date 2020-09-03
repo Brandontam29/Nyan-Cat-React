@@ -8,8 +8,13 @@
     height: 38px;
 
     .hamburger {
+        width: auto;
         height: 100%;
 
         margin-right: 2px;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }

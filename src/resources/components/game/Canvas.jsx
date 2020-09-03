@@ -4,27 +4,26 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
-
-import {
-    GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
-} from '../../lib/data';
-import useKeyPress from '../../lib/useKeyPress';
+import { GAME_HEIGHT, GAME_COLUMNS, GAME_WIDTH } from '../../lib/data';
+import useKeyPress from '../../hooks/useKeyPress';
 
 import { setPlayerPosition as setPlayerPositionAction } from '../../actions/playerActions';
 
 import starynight from '../../images/starynight.png';
 import Player from './Player';
 import EnemyGenerator from './EnemyGenerator';
-import HealthBar from './HealthBar';
-import Maximize from '../icons/Maximize';
-import Minimize from '../icons/Minimize';
+import TouchButtons from './TouchButtons';
+import Overlay from '../partials/Overlay';
+import TopBar from '../partials/TopBar';
 
 import styles from '../../styles/game/canvas.scss';
 
 const propTypes = {
     playerHealth: PropTypes.number.isRequired,
+    playButton: PropTypes.func,
     gameOver: PropTypes.bool.isRequired,
     level: PropTypes.number,
+    starting: PropTypes.bool,
     pause: PropTypes.bool,
     playerPosition: PropTypes.number.isRequired,
     setPlayerPosition: PropTypes.func.isRequired,
@@ -32,13 +31,15 @@ const propTypes = {
 };
 
 const defaultProps = {
+    playButton: null,
     level: 4,
+    starting: false,
     pause: true,
     className: null,
 };
 
 const Canvas = ({
-    playerHealth, gameOver, level, pause, playerPosition, setPlayerPosition, className,
+    playerHealth, playButton, gameOver, level, pause, starting, playerPosition, setPlayerPosition, className,
 }) => {
     const [fullScreen, setFullScreen] = useState(false);
     const toggleFullScreen = () => {
@@ -64,6 +65,10 @@ const Canvas = ({
     };
 
     useKeyPress('f', toggleFullScreen);
+    useKeyPress('a', pause ? () => {} : moveLeft);
+    useKeyPress('d', pause ? () => {} : moveRight);
+    useKeyPress(' ', playButton);
+
     return (
         <div
             className={classNames([
@@ -73,56 +78,22 @@ const Canvas = ({
                 },
             ])}
             style={{
+                maxWidth: GAME_WIDTH,
                 maxHeight: GAME_HEIGHT,
             }}
         >
             <img src={starynight} alt="starry night sky background" className={styles.staryNight} />
             <EnemyGenerator level={level} gameOver={gameOver} pause={pause} />
-            <Player
-                className={styles.player}
-                style={{
-                    top: `${PLAYER_HEIGHT / (GAME_HEIGHT * 100)}%`,
-                }}
+            <Player />
+            <TouchButtons visible={starting} topButton={playButton} leftButton={moveLeft} rightButton={moveRight} />
+            <TopBar
+                fullScreen={fullScreen}
+                level={level}
+                toggleFullScreen={toggleFullScreen}
+                playerHealth={playerHealth}
+                className={styles.topBar}
             />
-            <div className={styles.topBar}>
-                {`Level ${level}`}
-            </div>
-            <HealthBar health={playerHealth} className={styles.healthBar} />
-            { pause && !gameOver ? (
-                <div className={styles.overlayDim}>
-                    <div className={styles.overlayText}>Paused</div>
-                </div>
-            ) : null}
-            { gameOver ? (
-                <div className={styles.overlayDim}>
-                    <div className={styles.overlayText}>Game Over</div>
-                </div>
-            ) : null}
-            <button
-                type="button"
-                onClick={toggleFullScreen}
-                className={classNames([styles.touchButton, styles.fullScreen])}
-            >
-                {fullScreen
-                    ? <Minimize className={styles.fullScreenButton} />
-                    : <Maximize className={styles.fullScreenButton} />}
-            </button>
-            <button
-                type="button"
-                onClick={moveLeft}
-                disabled={pause}
-                className={classNames([styles.touchButton, styles.leftButton])}
-            >
-                Move Left
-            </button>
-            <button
-                type="button"
-                onClick={moveRight}
-                disabled={pause}
-                className={classNames([styles.touchButton, styles.rightButton])}
-            >
-                Move Left
-            </button>
+            <Overlay pause={pause} starting={starting} gameOver={gameOver} />
         </div>
     );
 };

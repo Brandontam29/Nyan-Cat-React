@@ -4,7 +4,7 @@ import React from 'react';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
-// import styles from '../../styles/main/Minimize.scss';
+// import styles from '../../styles/main/MinimizeIcon.scss';
 
 const propTypes = {
     className: AppPropTypes.className,
@@ -14,7 +14,7 @@ const defaultProps = {
     className: null,
 };
 
-const Minimize = ({ className }) => (
+const MinimizeIcon = ({ className }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -31,7 +31,7 @@ const Minimize = ({ className }) => (
     </svg>
 );
 
-Minimize.propTypes = propTypes;
-Minimize.defaultProps = defaultProps;
+MinimizeIcon.propTypes = propTypes;
+MinimizeIcon.defaultProps = defaultProps;
 
-export default Minimize;
+export default MinimizeIcon;

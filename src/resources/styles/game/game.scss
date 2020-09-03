@@ -12,13 +12,15 @@
     .gameOptions {
         display: flex;
         flex-direction: row;
-        margin: 0 10px 15px;
+        margin-bottom: 15px;
     }
 
     .pauseButton {
         @extend %reset-button;
 
-        width: 50%;
+        flex-grow: 1;
+
+        height: 40px;
         margin-right: 10px;
         padding: 10px 0;
 
@@ -43,17 +45,8 @@
     }
 
     .healthBar {
-        width: 50%;
     }
 
     @media #{$mq-small-screen} {
-        .canvas {
-            // margin-bottom: 15px;
-        }
-
-        .gameOptions {
-            margin-left: 0;
-            margin-right: 0;
-        }
     }
 }

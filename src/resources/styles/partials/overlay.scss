@@ -1,0 +1,23 @@
+@import "../commons/variables";
+@import "../commons/placeholders";
+
+.container {
+    @extend %fullscreen;
+
+    visibility: hidden;
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+    &.isVisible {
+        visibility: visible;
+        display: flex;
+    }
+
+    .overlayText {
+        font-size: $font-size-big-small;
+    }
+}

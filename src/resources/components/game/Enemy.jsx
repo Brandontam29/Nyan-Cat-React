@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -6,7 +5,7 @@ import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import {
-    ENEMY_WIDTH, ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
+    ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
 } from '../../lib/data';
 import { setEnemiesStatus as setEnemiesStatusAction } from '../../actions/enemiesActions';
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
@@ -19,36 +18,29 @@ import styles from '../../styles/game/enemy.scss';
 const propTypes = {
     gameOver: PropTypes.bool.isRequired,
     pause: PropTypes.bool,
-    // enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     spot: PropTypes.number.isRequired,
-    dropSpeed: PropTypes.number, // maybe required
-    // gameSpeed: PropTypes.number, // required
+    dropSpeed: PropTypes.number,
     falling: PropTypes.bool.isRequired,
-    // subtractActiveEnemies: PropTypes.func.isRequired,
     calculatePlayerHealth: PropTypes.func.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
-    // playerHealth: PropTypes.number.isRequired,
     playerPosition: PropTypes.number.isRequired,
     className: AppPropTypes.className,
 };
 
 const defaultProps = {
     pause: false,
-    dropSpeed: 20,
-    // gameSpeed: 1,
+    dropSpeed: 135,
     className: null,
 };
 
 const Enemy = ({
     gameOver,
     pause,
-    // enemiesStatus,
     spot,
     dropSpeed,
     falling,
     calculatePlayerHealth,
     setEnemiesStatus,
-    // playerHealth,
     playerPosition,
     className,
 }) => {
@@ -109,7 +101,6 @@ Enemy.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ player }) => ({
     playerPosition: player.position,
-    // playerHealth: player.health,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
     calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),
