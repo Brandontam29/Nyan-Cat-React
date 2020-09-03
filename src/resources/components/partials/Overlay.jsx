@@ -21,12 +21,16 @@ const Overlay = ({
     starting, gameOver, pause, className,
 }) => {
     const [count, setCount] = useState(3);
+    const [firstLoad, setFirstLoad] = useState(true);
 
     const renderText = () => {
         if (starting) {
             return count;
         }
         if (gameOver) {
+            if (firstLoad) {
+                return 'Play';
+            }
             return 'Game Over';
         }
         if (pause) {
@@ -41,8 +45,17 @@ const Overlay = ({
             id = setTimeout(() => setCount(count - 1), 1000);
             return () => clearTimeout(id);
         }
+        setCount(3);
         return () => clearTimeout(id);
     }, [starting, count]);
+
+    useEffect(() => {
+        if (!gameOver) {
+            setFirstLoad(false);
+        }
+    }, [gameOver]);
+
+    // badly done starting
 
     return (
         <div

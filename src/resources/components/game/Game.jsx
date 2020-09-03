@@ -31,7 +31,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
     const [disablePause, setDisablePause] = useState(false);
 
     const [starting, setStarting] = useState(false);
-    const [gameOver, setGameOver] = useState(false);
+    const [gameOver, setGameOver] = useState(true);
 
 
     const pausePlay = () => {
