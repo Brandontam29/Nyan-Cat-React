@@ -1,6 +1,6 @@
 # Burgerino vs Nyan Cat #
 Play as Burgerino to evade the famished Nyan Cats.\
-**Try it now**: https://relaxed-williams-b01bbd.netlify.app/
+**Try it now**: https://burgerino-vs-nyan-cat.tk/
 
 
 ### Project description ###
@@ -50,4 +50,4 @@ npm run build
 ```
 
 **Easiest way: Use this link**\
-https://relaxed-williams-b01bbd.netlify.app/
+https://burgerino-vs-nyan-cat.tk/
