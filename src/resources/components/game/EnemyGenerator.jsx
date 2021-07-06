@@ -61,7 +61,6 @@ const EnemyGenerator = ({
         for (let i = 0; i < GAME_COLUMNS; i += 1) {
             enemies.push(
                 <Enemy
-                    // key={uuid()}
                     pause={pause}
                     gameOver={gameOver}
                     falling={enemiesStatus[i]}

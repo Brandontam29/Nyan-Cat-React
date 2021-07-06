@@ -9,8 +9,8 @@ $color-text: $color-white;
 /**
  * Fonts
  */
-$font-text: "Inconsolata", sans-serif;
-$font-game: "Visitor", monospace;
+$font-text: 'Inconsolata', sans-serif;
+$font-game: 'Visitor', monospace;
 
 $font-size-smaller: 10px;
 $font-size-small: 12px;
@@ -40,7 +40,7 @@ $x-large-screen: 1920px;
 /**
   * Media queries
   */
-$mq-small-screen: "only screen and (min-width: #{$small-screen})";
-$mq-medium-screen: "only screen and (min-width: #{$medium-screen})";
-$mq-large-screen: "only screen and (min-width: #{$large-screen})";
-$mq-x-large-screen: "only screen and (min-width: #{$x-large-screen})";
+$mq-small-screen: 'only screen and (min-width: #{$small-screen})';
+$mq-medium-screen: 'only screen and (min-width: #{$medium-screen})';
+$mq-large-screen: 'only screen and (min-width: #{$large-screen})';
+$mq-x-large-screen: 'only screen and (min-width: #{$x-large-screen})';

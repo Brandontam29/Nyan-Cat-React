@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-// import uuid from 'uuid-random';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import { GAME_WIDTH, STARTING_HEALTH } from '../../lib/data';
-import useKeyPress from '../../hooks/useKeyPress';
 
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
 
@@ -45,7 +43,6 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
                 }
                 return setPause(!pause);
             }
-            return;
         }
 
         setStarting(true);
@@ -91,9 +88,8 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         return `Pause (${pauseCount})`;
     };
 
-    // useKeyPress(' ', pausePlay);
     return (
-        <div
+        <section
             className={classNames([
                 styles.container,
                 {
@@ -124,7 +120,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
                 </button>
                 <HealthBar health={playerHealth} className={styles.healthBar} />
             </div>
-        </div>
+        </section>
     );
 };
 

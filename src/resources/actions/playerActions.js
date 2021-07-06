@@ -15,10 +15,3 @@ export const calculatePlayerHealth = (number) => {
         payload: number,
     });
 };
-
-// export const minusPlayerHealth = (number) => {
-//     return ({
-//         type: MINUS_PLAYER_HEALTH,
-//         payload: number,
-//     });
-// };

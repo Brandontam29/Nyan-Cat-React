@@ -20,7 +20,6 @@ const loginReducer = (state = initialState, action) => {
         };
     }
     default:
-        // console.log(state);
         return state;
     }
 };

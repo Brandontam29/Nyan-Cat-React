@@ -38,7 +38,6 @@ const TouchButtons = ({
             <button
                 type="button"
                 onClick={topButton}
-                // disabled={pause}
                 className={styles.topButton}
             >
                 Pause & Play Button
@@ -46,7 +45,6 @@ const TouchButtons = ({
             <button
                 type="button"
                 onClick={leftButton}
-                // disabled={pause}
                 className={styles.leftButton}
             >
                 Move Left

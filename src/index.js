@@ -12,5 +12,3 @@ if (ready) {
     start();
 }
 domready(start());
-
-// ReactDOM.render(<Root />, document.getElementById('app'));

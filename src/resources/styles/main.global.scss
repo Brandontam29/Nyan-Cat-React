@@ -1,11 +1,11 @@
 /**
  * Commons
  */
-@import "commons/variables";
-@import "commons/placeholders";
-@import "commons/fonts";
-@import "commons/reset";
-@import "commons/general";
+@import 'commons/variables';
+@import 'commons/placeholders';
+@import 'commons/fonts';
+@import 'commons/reset';
+@import 'commons/general';
 
 html,
 body {
@@ -32,6 +32,6 @@ body {
     letter-spacing: 0.025em;
     text-rendering: optimizeLegibility;
 
-    font-feature-settings: "liga";
+    font-feature-settings: 'liga';
     font-kerning: auto;
 }

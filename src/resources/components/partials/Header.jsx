@@ -15,7 +15,7 @@ const defaultProps = {
 };
 
 const Header = ({ className }) => (
-    <div
+    <header
         className={classNames([
             styles.container,
             {
@@ -32,12 +32,14 @@ const Header = ({ className }) => (
             </span>
         </div>
         <div className={styles.paragraph}>
-            <h3>How to Play</h3>
-            <span>Move: A and D</span>
-            <span>Pause/Play: Space</span>
-            <span>Fullscreen: F</span>
+            <h2>How to Play</h2>
+            <ul>
+                <li>Move: A and D</li>
+                <li>Pause/Play: Space</li>
+                <li>Fullscreen: F</li>
+            </ul>
         </div>
-    </div>
+    </header>
 );
 
 Header.propTypes = propTypes;
