@@ -3,6 +3,7 @@ export const SET_PAUSE = 'SET_PAUSE';
 export const SET_GAME_OVER = 'SET_GAME_OVER';
 export const INCREMENT_LEVEL = 'INCREMENT_LEVEL';
 export const SET_LEVEL = 'SET_LEVEL';
+export const SET_PAUSE_DISABLED = 'SET_PAUSE_DISABLED';
 
 export const setSelectionMode = (bool) => ({
     type: SELECTION_MODE,
@@ -11,6 +12,11 @@ export const setSelectionMode = (bool) => ({
 
 export const setPause = (bool) => ({
     type: SET_PAUSE,
+    payload: bool,
+});
+
+export const setPauseDisabled = (bool) => ({
+    type: SET_PAUSE_DISABLED,
     payload: bool,
 });
 

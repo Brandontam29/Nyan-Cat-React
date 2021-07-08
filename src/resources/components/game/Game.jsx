@@ -12,6 +12,7 @@ import { moveRight, moveLeft } from '../../lib/playerMove';
 import { setPlayerHealth as setPlayerHealthAction } from '../../actions/playerActions';
 import {
     setPause as setPauseAction,
+    setPauseDisabled as setPauseDisabledAction,
     setGameOver as setGameOverAction,
     setLevel as setLevelAction,
 } from '../../actions/gameActions';
@@ -26,7 +27,9 @@ const propTypes = {
     gameOver: PropTypes.bool.isRequired,
     level: PropTypes.number.isRequired,
     playerHealth: PropTypes.number.isRequired,
+    pauseDisabled: PropTypes.bool.isRequired,
     setPlayerHealth: PropTypes.func.isRequired,
+    setPauseDisabled: PropTypes.func.isRequired,
     setPause: PropTypes.func.isRequired,
     setGameOver: PropTypes.func.isRequired,
     setLevel: PropTypes.func.isRequired,
@@ -40,22 +43,31 @@ const defaultProps = {
 // All the game logic should be set here and children components will simply act depending on the data
 
 const Game = ({
-    pause, gameOver, level, playerHealth, setPause, setGameOver, setLevel, setPlayerHealth, className,
+    pause,
+    gameOver,
+    level,
+    playerHealth,
+    setPause,
+    setPauseDisabled,
+    pauseDisabled,
+    setGameOver,
+    setLevel,
+    setPlayerHealth,
+    className,
 }) => {
     const [pauseCount, setPauseCount] = useState(3);
-    const [disablePause, setDisablePause] = useState(false);
 
     const [starting, setStarting] = useState(false);
 
 
     const pausePlay = () => {
         if (!gameOver) {
-            if (!disablePause) {
+            if (!pauseDisabled) {
                 if (!pause) {
                     setPauseCount(pauseCount - 1);
                 }
                 if (pauseCount === 0) {
-                    setDisablePause(true);
+                    setPauseDisabled(true);
                 }
                 return setPause(!pause);
             }
@@ -66,7 +78,7 @@ const Game = ({
             setStarting(false);
             setPauseCount(3);
             setPause(false);
-            setDisablePause(false);
+            setPauseDisabled(false);
             setPlayerHealth(STARTING_HEALTH);
             return setGameOver(false);
         }, 3000);
@@ -89,7 +101,7 @@ const Game = ({
     useEffect(() => {
         if (playerHealth === 0) {
             setPause(true);
-            setDisablePause(true);
+            setPauseDisabled(true);
             setPauseCount(0);
             setGameOver(true);
         }
@@ -131,7 +143,7 @@ const Game = ({
                 <button
                     type="button"
                     onClick={pausePlay}
-                    disabled={disablePause && !gameOver}
+                    disabled={pauseDisabled && !gameOver}
                     className={styles.pauseButton}
                 >
                     {buttonText()}
@@ -150,10 +162,12 @@ const WithReduxContainer = connect(({ game, player }) => ({
     gameOver: game.gameOver,
     level: game.level,
     playerHealth: player.health,
+    pauseDisabled: game.pauseDisabled,
 
 }), (dispatch) => ({
     setPlayerHealth: (value) => dispatch(setPlayerHealthAction(value)),
     setPause: (value) => dispatch(setPauseAction(value)),
+    setPauseDisabled: (value) => dispatch(setPauseDisabledAction(value)),
     setGameOver: (value) => dispatch(setGameOverAction(value)),
     setLevel: (value) => dispatch(setLevelAction(value)),
 }))(Game);
