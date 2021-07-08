@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
-import { moveLeft, moveRight } from '../../hooks/playerMove';
+import { moveLeft, moveRight } from '../../lib/playerMove';
 
 import styles from '../../styles/game/touch-buttons.scss';
 

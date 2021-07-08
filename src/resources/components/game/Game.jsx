@@ -6,18 +6,26 @@ import { connect } from 'react-redux';
 import * as AppPropTypes from '../../lib/PropTypes';
 import { GAME_WIDTH, STARTING_HEALTH } from '../../lib/data';
 import useKeyPress from '../../hooks/useKeyPress';
-import toggleFullScreen from '../../hooks/toggleFullScreen';
-import { moveRight, moveLeft } from '../../hooks/playerMove';
+import toggleFullScreen from '../../lib/toggleFullScreen';
+import { moveRight, moveLeft } from '../../lib/playerMove';
 
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
+import { setPause as setPauseAction, setGameOver as setGameOverAction, setLevel as setLevelAction } from '../../actions/gameActions';
+
 
 import Canvas from './Canvas';
 import HealthBar from './HealthBar';
 import styles from '../../styles/game/game.scss';
 
 const propTypes = {
+    pause: PropTypes.bool.isRequired,
+    gameOver: PropTypes.bool.isRequired,
+    level: PropTypes.number.isRequired,
     playerHealth: PropTypes.number.isRequired,
     calculatePlayerHealth: PropTypes.func.isRequired,
+    setPause: PropTypes.func.isRequired,
+    setGameOver: PropTypes.func.isRequired,
+    setLevel: PropTypes.func.isRequired,
     className: AppPropTypes.className,
 };
 
@@ -27,14 +35,13 @@ const defaultProps = {
 
 // All the game logic should be set here and children components will simply act depending on the data
 
-const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
-    const [level, setLevel] = useState(0);
-    const [pause, setPause] = useState(false);
+const Game = ({
+    pause, gameOver, level, playerHealth, setPause, setGameOver, setLevel, calculatePlayerHealth, className,
+}) => {
     const [pauseCount, setPauseCount] = useState(3);
     const [disablePause, setDisablePause] = useState(false);
 
     const [starting, setStarting] = useState(false);
-    const [gameOver, setGameOver] = useState(true);
 
 
     const pausePlay = () => {
@@ -61,6 +68,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         }, 3000);
     };
 
+    // Increment level based on fixed time
     useEffect(() => {
         let id = 0;
         if (!pause && !gameOver) {
@@ -133,10 +141,17 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
 Game.propTypes = propTypes;
 Game.defaultProps = defaultProps;
 
-const WithReduxContainer = connect(({ player }) => ({
+const WithReduxContainer = connect(({ game, player }) => ({
+    pause: game.pause,
+    gameOver: game.gameOver,
+    level: game.level,
     playerHealth: player.health,
+
 }), (dispatch) => ({
     calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),
+    setPause: (value) => dispatch(setPauseAction(value)),
+    setGameOver: (value) => dispatch(setGameOverAction(value)),
+    setLevel: (value) => dispatch(setLevelAction(value)),
 }))(Game);
 
 export default WithReduxContainer;

@@ -77,7 +77,6 @@ const WithReduxContainer = connect(({ game, enemies }) => ({
     gameOver: game.gameOver,
     level: game.level,
     enemiesStatus: enemies.enemiesStatus,
-
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
 }))(EnemyGenerator);

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
-import toggleFullScreen from '../../hooks/toggleFullScreen';
+import toggleFullScreen from '../../lib/toggleFullScreen';
 
 import Maximize from '../icons/Maximize';
 import Minimize from '../icons/Minimize';
@@ -58,8 +58,8 @@ const TopBar = ({
 TopBar.propTypes = propTypes;
 TopBar.defaultProps = defaultProps;
 
-const WithReduxContainer = connect(({ game,player }) => ({
-    level: game.level, 
+const WithReduxContainer = connect(({ game, player }) => ({
+    level: game.level,
     playerHealth: player.health,
     playerPosition: player.position,
 }), () => ({

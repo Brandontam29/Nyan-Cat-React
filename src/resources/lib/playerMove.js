@@ -1,10 +1,9 @@
 /* eslint-disable import/prefer-default-export */
-import { GAME_COLUMNS } from '../lib/data';
+import { GAME_COLUMNS } from './data';
 import configureStore from '../store/configureStore';
 import { setPlayerPosition } from '../actions/playerActions';
 
 const store = configureStore;
-
 
 export const moveLeft = () => {
     const playerPosition = store.getState().player.position;

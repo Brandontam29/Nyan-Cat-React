@@ -46,7 +46,7 @@ const Enemy = ({
     const [top, setTop] = useState(-ENEMY_HEIGHT);
     const [touched, setTouched] = useState(false);
 
-    // Logic to determine when to fall
+    // Logic to determine when to fall and check for collision
     useEffect(() => {
         let id = 0;
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {

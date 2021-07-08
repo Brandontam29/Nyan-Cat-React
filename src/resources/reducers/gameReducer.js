@@ -1,5 +1,5 @@
 import {
-    SELECTION_MODE, TOGGLE_PAUSE, TOGGLE_GAME_OVER, INCREMENT_LEVEL, SET_LEVEL,
+    SELECTION_MODE, SET_PAUSE, SET_GAME_OVER, INCREMENT_LEVEL, SET_LEVEL,
 } from '../actions/gameActions';
 
 
@@ -18,16 +18,16 @@ const gameReducer = (state = initialState, action) => {
             selectionMode: action.payload,
         };
     }
-    case TOGGLE_PAUSE: {
+    case SET_PAUSE: {
         return {
             ...state,
-            pause: !state.pause,
+            pause: action.payload,
         };
     }
-    case TOGGLE_GAME_OVER: {
+    case SET_GAME_OVER: {
         return {
             ...state,
-            gameOver: !state.gameOver,
+            gameOver: action.payload,
         };
     }
     case INCREMENT_LEVEL: {
