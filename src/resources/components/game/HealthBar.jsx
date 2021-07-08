@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import uuid from 'uuid-random';
 
 import * as AppPropTypes from '../../lib/PropTypes';
@@ -19,6 +20,8 @@ const propTypes = {
 const defaultProps = {
     className: null,
 };
+
+// Dumb component
 
 const HealthBar = ({ health, className }) => {
     const createHealthBar = () => {
@@ -61,4 +64,9 @@ const HealthBar = ({ health, className }) => {
 HealthBar.propTypes = propTypes;
 HealthBar.defaultProps = defaultProps;
 
-export default HealthBar;
+const WithReduxContainer = connect(({ player }) => ({
+    health: player.health,
+}), () => ({
+}))(HealthBar);
+
+export default WithReduxContainer;

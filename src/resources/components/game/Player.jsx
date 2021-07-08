@@ -20,6 +20,8 @@ const defaultProps = {
     className: null,
 };
 
+// Dumb component
+
 const Player = ({
     playerPosition, className,
 }) => {

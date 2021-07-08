@@ -6,7 +6,7 @@ import configureStore from '../store/configureStore';
 
 const Root = () => (
     <React.StrictMode>
-        <ReduxProvider store={configureStore()}>
+        <ReduxProvider store={configureStore}>
             <App />
         </ReduxProvider>
     </React.StrictMode>

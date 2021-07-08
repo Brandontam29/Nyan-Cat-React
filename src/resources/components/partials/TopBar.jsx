@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
+import toggleFullScreen from '../../hooks/toggleFullScreen';
 
 import Maximize from '../icons/Maximize';
 import Minimize from '../icons/Minimize';
@@ -11,23 +13,21 @@ import HealthBar from '../game/HealthBar';
 import styles from '../../styles/partials/top-bar.scss';
 
 const propTypes = {
-    fullScreen: PropTypes.bool.isRequired,
-    toggleFullScreen: PropTypes.func,
-    level: PropTypes.number,
-    playerHealth: PropTypes.number,
+    level: PropTypes.number.isRequired,
+    playerHealth: PropTypes.number.isRequired,
     className: AppPropTypes.className,
 };
 
 const defaultProps = {
-    toggleFullScreen: null,
-    level: null,
-    playerHealth: 0,
     className: null,
 };
 
 const TopBar = ({
-    fullScreen, toggleFullScreen, level, playerHealth, className,
+    level, playerHealth, className,
 }) => {
+    // Need fix
+    const fullScreen = false;
+
     return (
         <div
             className={classNames([
@@ -58,4 +58,11 @@ const TopBar = ({
 TopBar.propTypes = propTypes;
 TopBar.defaultProps = defaultProps;
 
-export default TopBar;
+const WithReduxContainer = connect(({ game,player }) => ({
+    level: game.level, 
+    playerHealth: player.health,
+    playerPosition: player.position,
+}), () => ({
+}))(TopBar);
+
+export default WithReduxContainer;

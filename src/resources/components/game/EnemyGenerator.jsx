@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import classNames from 'classnames';
 import { connect } from 'react-redux';
-// import uuid from 'uuid-random';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import {
@@ -19,20 +18,16 @@ import Enemy from './Enemy';
 import styles from '../../styles/game/enemy-generator.scss';
 
 const propTypes = {
-    pause: PropTypes.bool,
     gameOver: PropTypes.bool.isRequired,
     enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
-    level: PropTypes.number,
+    level: PropTypes.number.isRequired,
 };
 
 const defaultProps = {
-    pause: false,
-    level: 10,
 };
 
 const EnemyGenerator = ({
-    pause,
     gameOver,
     enemiesStatus,
     setEnemiesStatus,
@@ -61,8 +56,6 @@ const EnemyGenerator = ({
         for (let i = 0; i < GAME_COLUMNS; i += 1) {
             enemies.push(
                 <Enemy
-                    pause={pause}
-                    gameOver={gameOver}
                     falling={enemiesStatus[i]}
                     spot={i}
                     dropSpeed={speed[i]}
@@ -80,8 +73,11 @@ EnemyGenerator.propTypes = propTypes;
 EnemyGenerator.defaultProps = defaultProps;
 
 
-const WithReduxContainer = connect(({ enemies }) => ({
+const WithReduxContainer = connect(({ game, enemies }) => ({
+    gameOver: game.gameOver,
+    level: game.level,
     enemiesStatus: enemies.enemiesStatus,
+
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
 }))(EnemyGenerator);

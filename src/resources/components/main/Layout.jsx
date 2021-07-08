@@ -3,7 +3,6 @@ import React from 'react';
 import classNames from 'classnames';
 
 import * as AppPropTypes from '../../lib/PropTypes';
-// import { GAME_WIDTH } from '../../lib/data';
 
 import Header from '../partials/Header';
 import Game from '../game/Game';

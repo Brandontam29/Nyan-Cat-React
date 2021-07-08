@@ -17,7 +17,7 @@ import styles from '../../styles/game/enemy.scss';
 
 const propTypes = {
     gameOver: PropTypes.bool.isRequired,
-    pause: PropTypes.bool,
+    pause: PropTypes.bool.isRequired,
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number,
     falling: PropTypes.bool.isRequired,
@@ -28,7 +28,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-    pause: false,
     dropSpeed: 135,
     className: null,
 };
@@ -46,6 +45,8 @@ const Enemy = ({
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
     const [touched, setTouched] = useState(false);
+
+    // Logic to determine when to fall
     useEffect(() => {
         let id = 0;
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
@@ -70,6 +71,7 @@ const Enemy = ({
         return () => clearTimeout(id);
     }, [top, falling, pause, gameOver]);
 
+    // Reset position on game over
     useEffect(() => {
         if (gameOver) {
             setEnemiesStatus({ spot, falling: false });
@@ -99,7 +101,9 @@ const Enemy = ({
 Enemy.propTypes = propTypes;
 Enemy.defaultProps = defaultProps;
 
-const WithReduxContainer = connect(({ player }) => ({
+const WithReduxContainer = connect(({ game, player }) => ({
+    pause: game.pause,
+    gameOver: game.gameOver,
     playerPosition: player.position,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),

@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import { GAME_WIDTH, STARTING_HEALTH } from '../../lib/data';
+import useKeyPress from '../../hooks/useKeyPress';
+import toggleFullScreen from '../../hooks/toggleFullScreen';
+import { moveRight, moveLeft } from '../../hooks/playerMove';
 
 import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
 
@@ -21,6 +24,8 @@ const propTypes = {
 const defaultProps = {
     className: null,
 };
+
+// All the game logic should be set here and children components will simply act depending on the data
 
 const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
     const [level, setLevel] = useState(0);
@@ -88,6 +93,11 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
         return `Pause (${pauseCount})`;
     };
 
+    useKeyPress('f', toggleFullScreen);
+    useKeyPress('a', pause ? () => {} : moveLeft);
+    useKeyPress('d', pause ? () => {} : moveRight);
+    useKeyPress(' ', pausePlay);
+
     return (
         <section
             className={classNames([
@@ -101,12 +111,8 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
             }}
         >
             <Canvas
-                playerHealth={playerHealth}
                 playButton={pausePlay}
-                gameOver={gameOver}
                 starting={starting}
-                level={level}
-                pause={pause}
                 className={styles.canvas}
             />
             <div className={styles.gameOptions}>
@@ -118,7 +124,7 @@ const Game = ({ playerHealth, calculatePlayerHealth, className }) => {
                 >
                     {buttonText()}
                 </button>
-                <HealthBar health={playerHealth} className={styles.healthBar} />
+                <HealthBar className={styles.healthBar} />
             </div>
         </section>
     );

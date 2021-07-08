@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
@@ -77,4 +78,10 @@ const Overlay = ({
 Overlay.propTypes = propTypes;
 Overlay.defaultProps = defaultProps;
 
-export default Overlay;
+const WithReduxContainer = connect(({ game }) => ({
+    gameOver: game.gameOver,
+    pause: game.pause,
+}), () => ({
+}))(Overlay);
+
+export default WithReduxContainer;

@@ -4,26 +4,25 @@ import classNames from 'classnames';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
+import { moveLeft, moveRight } from '../../hooks/playerMove';
+
 import styles from '../../styles/game/touch-buttons.scss';
 
 const propTypes = {
     visible: PropTypes.bool,
     topButton: PropTypes.func,
-    leftButton: PropTypes.func,
-    rightButton: PropTypes.func,
     className: AppPropTypes.className,
 };
 
 const defaultProps = {
     visible: false,
     topButton: null,
-    leftButton: null,
-    rightButton: null,
     className: null,
 };
+// Need to remove visible and topButton prop
 
 const TouchButtons = ({
-    visible, topButton, leftButton, rightButton, className,
+    visible, topButton, className,
 }) => {
     return (
         <div
@@ -44,14 +43,14 @@ const TouchButtons = ({
             </button>
             <button
                 type="button"
-                onClick={leftButton}
+                onClick={moveLeft}
                 className={styles.leftButton}
             >
                 Move Left
             </button>
             <button
                 type="button"
-                onClick={rightButton}
+                onClick={moveRight}
                 className={styles.rightButton}
             >
                 Move Right

@@ -1,4 +1,6 @@
-import { SET_PLAYER_POSITION, CALCULATE_PLAYER_HEALTH } from '../actions/playerActions';
+import {
+    SET_PLAYER_POSITION, CALCULATE_PLAYER_HEALTH,
+} from '../actions/playerActions';
 import { GAME_COLUMNS, STARTING_HEALTH } from '../lib/data';
 
 const initialState = {
