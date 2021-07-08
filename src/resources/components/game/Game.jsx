@@ -9,8 +9,12 @@ import useKeyPress from '../../hooks/useKeyPress';
 import toggleFullScreen from '../../lib/toggleFullScreen';
 import { moveRight, moveLeft } from '../../lib/playerMove';
 
-import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
-import { setPause as setPauseAction, setGameOver as setGameOverAction, setLevel as setLevelAction } from '../../actions/gameActions';
+import { setPlayerHealth as setPlayerHealthAction } from '../../actions/playerActions';
+import {
+    setPause as setPauseAction,
+    setGameOver as setGameOverAction,
+    setLevel as setLevelAction,
+} from '../../actions/gameActions';
 
 
 import Canvas from './Canvas';
@@ -22,7 +26,7 @@ const propTypes = {
     gameOver: PropTypes.bool.isRequired,
     level: PropTypes.number.isRequired,
     playerHealth: PropTypes.number.isRequired,
-    calculatePlayerHealth: PropTypes.func.isRequired,
+    setPlayerHealth: PropTypes.func.isRequired,
     setPause: PropTypes.func.isRequired,
     setGameOver: PropTypes.func.isRequired,
     setLevel: PropTypes.func.isRequired,
@@ -36,7 +40,7 @@ const defaultProps = {
 // All the game logic should be set here and children components will simply act depending on the data
 
 const Game = ({
-    pause, gameOver, level, playerHealth, setPause, setGameOver, setLevel, calculatePlayerHealth, className,
+    pause, gameOver, level, playerHealth, setPause, setGameOver, setLevel, setPlayerHealth, className,
 }) => {
     const [pauseCount, setPauseCount] = useState(3);
     const [disablePause, setDisablePause] = useState(false);
@@ -63,7 +67,7 @@ const Game = ({
             setPauseCount(3);
             setPause(false);
             setDisablePause(false);
-            calculatePlayerHealth(-playerHealth + STARTING_HEALTH);
+            setPlayerHealth(STARTING_HEALTH);
             return setGameOver(false);
         }, 3000);
     };
@@ -148,7 +152,7 @@ const WithReduxContainer = connect(({ game, player }) => ({
     playerHealth: player.health,
 
 }), (dispatch) => ({
-    calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),
+    setPlayerHealth: (value) => dispatch(setPlayerHealthAction(value)),
     setPause: (value) => dispatch(setPauseAction(value)),
     setGameOver: (value) => dispatch(setGameOverAction(value)),
     setLevel: (value) => dispatch(setLevelAction(value)),

@@ -1,5 +1,5 @@
 export const SET_PLAYER_POSITION = 'SET_PLAYER_POSITION';
-export const CALCULATE_PLAYER_HEALTH = 'CALCULATE_PLAYER_HEALTH';
+export const SET_PLAYER_HEALTH = 'SET_PLAYER_HEALTH';
 
 export const setPlayerPosition = (number) => {
     return ({
@@ -8,9 +8,9 @@ export const setPlayerPosition = (number) => {
     });
 };
 
-export const calculatePlayerHealth = (number) => {
+export const setPlayerHealth = (number) => {
     return ({
-        type: CALCULATE_PLAYER_HEALTH,
+        type: SET_PLAYER_HEALTH,
         payload: number,
     });
 };

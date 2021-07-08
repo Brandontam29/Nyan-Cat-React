@@ -8,7 +8,7 @@ import {
     ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
 } from '../../lib/data';
 import { setEnemiesStatus as setEnemiesStatusAction } from '../../actions/enemiesActions';
-import { calculatePlayerHealth as calculatePlayerHealthAction } from '../../actions/playerActions';
+import { setPlayerHealth as setPlayerHealthAction } from '../../actions/playerActions';
 
 import enemyImage from '../../images/enemy.png';
 
@@ -21,9 +21,10 @@ const propTypes = {
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number,
     falling: PropTypes.bool.isRequired,
-    calculatePlayerHealth: PropTypes.func.isRequired,
+    setPlayerHealth: PropTypes.func.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
     playerPosition: PropTypes.number.isRequired,
+    playerHealth: PropTypes.number.isRequired,
     className: AppPropTypes.className,
 };
 
@@ -38,9 +39,10 @@ const Enemy = ({
     spot,
     dropSpeed,
     falling,
-    calculatePlayerHealth,
+    setPlayerHealth,
     setEnemiesStatus,
     playerPosition,
+    playerHealth,
     className,
 }) => {
     const [top, setTop] = useState(-ENEMY_HEIGHT);
@@ -55,7 +57,7 @@ const Enemy = ({
                 && top > GAME_HEIGHT - PLAYER_HEIGHT - ENEMY_HEIGHT
                 && playerPosition === spot) {
                 setTouched(true);
-                calculatePlayerHealth(-1);
+                setPlayerHealth(playerHealth - 1);
             }
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
@@ -105,9 +107,10 @@ const WithReduxContainer = connect(({ game, player }) => ({
     pause: game.pause,
     gameOver: game.gameOver,
     playerPosition: player.position,
+    playerHealth: player.health,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
-    calculatePlayerHealth: (value) => dispatch(calculatePlayerHealthAction(value)),
+    setPlayerHealth: (value) => dispatch(setPlayerHealthAction(value)),
 }))(Enemy);
 
 export default WithReduxContainer;
