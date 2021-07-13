@@ -79,6 +79,7 @@ Overlay.propTypes = propTypes;
 Overlay.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ game }) => ({
+    starting: game.starting,
     gameOver: game.gameOver,
     pause: game.pause,
 }), () => ({

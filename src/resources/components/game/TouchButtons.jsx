@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 
@@ -19,7 +20,7 @@ const defaultProps = {
     topButton: null,
     className: null,
 };
-// Need to remove visible and topButton prop
+// Need to remove topButton prop
 
 const TouchButtons = ({
     visible, topButton, className,
@@ -62,4 +63,9 @@ const TouchButtons = ({
 TouchButtons.propTypes = propTypes;
 TouchButtons.defaultProps = defaultProps;
 
-export default TouchButtons;
+const WithReduxContainer = connect(({ game }) => ({
+    visible: game.starting,
+}), () => ({
+}))(TouchButtons);
+
+export default WithReduxContainer;

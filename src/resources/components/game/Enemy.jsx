@@ -14,10 +14,10 @@ import enemyImage from '../../images/enemy.png';
 
 import styles from '../../styles/game/enemy.scss';
 
-
 const propTypes = {
     gameOver: PropTypes.bool.isRequired,
     pause: PropTypes.bool.isRequired,
+    starting: PropTypes.bool.isRequired,
     spot: PropTypes.number.isRequired,
     dropSpeed: PropTypes.number,
     falling: PropTypes.bool.isRequired,
@@ -33,9 +33,11 @@ const defaultProps = {
     className: null,
 };
 
+// Each enemy manages their own fallin animation, collision detection, and position reset
 const Enemy = ({
     gameOver,
     pause,
+    starting,
     spot,
     dropSpeed,
     falling,
@@ -51,6 +53,7 @@ const Enemy = ({
     // Logic to determine when to fall and check for collision
     useEffect(() => {
         let id = 0;
+        // collision detection
         if (falling && top < GAME_HEIGHT + ENEMY_HEIGHT && !pause) {
             if (!touched
                 && GAME_HEIGHT - ENEMY_HEIGHT * (1 / 2) > top
@@ -63,7 +66,7 @@ const Enemy = ({
             return () => clearTimeout(id);
         }
 
-
+        // position reset
         if (falling && !pause) {
             setEnemiesStatus({ spot, falling: false });
             setTouched(false);
@@ -73,13 +76,13 @@ const Enemy = ({
         return () => clearTimeout(id);
     }, [top, falling, pause, gameOver]);
 
-    // Reset position on game over
+    // Reset position when starting
     useEffect(() => {
-        if (gameOver) {
+        if (starting) {
             setEnemiesStatus({ spot, falling: false });
             setTop(-ENEMY_HEIGHT);
         }
-    }, [gameOver]);
+    }, [starting]);
 
     return (
         <img
@@ -106,6 +109,7 @@ Enemy.defaultProps = defaultProps;
 const WithReduxContainer = connect(({ game, player }) => ({
     pause: game.pause,
     gameOver: game.gameOver,
+    starting: game.starting,
     playerPosition: player.position,
     playerHealth: player.health,
 }), (dispatch) => ({

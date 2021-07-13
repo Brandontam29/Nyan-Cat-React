@@ -35,6 +35,7 @@ const EnemyGenerator = ({
 }) => {
     const [speed, setSpeed] = useState(new Array(GAME_COLUMNS).fill(150));
 
+    // Assign fall speed and falling to an enemy
     const activateEnemy = () => {
         const dropSpeed = Math.floor(Math.random() * -20);
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
@@ -44,6 +45,8 @@ const EnemyGenerator = ({
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
 
+    // Detect when to activateEnemies
+    // Enemies never activated when gameOver or when exceeding max enemy count
     useEffect(() => {
         const activeEnemies = findTrues(enemiesStatus);
         if (activeEnemies < MAX_ENEMIES && !gameOver) {
@@ -51,6 +54,7 @@ const EnemyGenerator = ({
         }
     }, [enemiesStatus, gameOver]);
 
+    // Creates the the necessary enemies once
     const createEnemies = () => {
         const enemies = [];
         for (let i = 0; i < GAME_COLUMNS; i += 1) {
