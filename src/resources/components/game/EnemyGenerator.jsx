@@ -38,7 +38,19 @@ const EnemyGenerator = ({
     // Assign fall speed and falling to an enemy
     const activateEnemy = () => {
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        const randomDropSpeed = 150 - 7 * level + (Math.floor(Math.random() * 20));
+        let randomDropSpeed = 160;
+        if (level < 6) {
+            randomDropSpeed = 150 + 6 * level + (Math.floor(Math.random() * 20));
+        } else if (level < 11) {
+            randomDropSpeed = 150 + 5 * level + (Math.floor(Math.random() * 20));
+        } else if (level < 28) {
+            randomDropSpeed = 150 + 4 * level + (Math.floor(Math.random() * 20));
+        } else if (level < 60) {
+            randomDropSpeed = 150 + 3 * level + (Math.floor(Math.random() * 20));
+        } else {
+            randomDropSpeed = 150 + 2 * level + (Math.floor(Math.random() * 20));
+        }
+
         setSpeed([...speed.slice(0, randomSpot), randomDropSpeed, ...speed.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };

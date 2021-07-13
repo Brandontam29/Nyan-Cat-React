@@ -8,5 +8,5 @@ export const PLAYER_WIDTH = 70;
 export const PLAYER_HEIGHT = 54;
 export const STARTING_HEALTH = 3;
 
-export const LEVEL_UP_DELAY = 1;
+export const LEVEL_UP_DELAY = 1.650;
 export const GAME_COLUMNS = Math.floor(GAME_WIDTH / PLAYER_WIDTH);

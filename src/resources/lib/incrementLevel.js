@@ -8,11 +8,11 @@ const store = configureStore;
 
 // Continuously increment level when it is called once until
 const incrementLevel = async () => {
-    const { gameOver, level } = store.getState().game;
+    const { gameOver, pause, level } = store.getState().game;
 
-    if (!gameOver) {
+    if (!gameOver && !pause) {
         store.dispatch(setLevel(level + 1));
-        await sleep(LEVEL_UP_DELAY * 1500);
+        await sleep(LEVEL_UP_DELAY * 1000);
         return incrementLevel();
     }
     return null;
