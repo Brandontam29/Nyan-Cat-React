@@ -1,19 +1,21 @@
 /* eslint-disable import/prefer-default-export */
 import configureStore from '../store/configureStore';
 import { setLevel } from '../actions/gameActions';
+import { sleep } from './utils';
+import { LEVEL_UP_DELAY } from './data';
 
 const store = configureStore;
 
 // Continuously increment level when it is called once until
-const incrementLevel = (pause, gameOver) => {
-    const { level } = store.getState().game;
+const incrementLevel = async () => {
+    const { gameOver, level } = store.getState().game;
 
-    let id = 0;
-    if (!pause && !gameOver) {
-        id = setTimeout(() => store.dispatch(setLevel(level + 1), 7 * 1000));
-        return () => clearTimeout(id);
+    if (!gameOver) {
+        store.dispatch(setLevel(level + 1));
+        await sleep(LEVEL_UP_DELAY * 1500);
+        return incrementLevel();
     }
-    return () => clearTimeout(id);
+    return null;
 };
 
 export default incrementLevel;

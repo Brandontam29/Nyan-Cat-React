@@ -37,10 +37,8 @@ const EnemyGenerator = ({
 
     // Assign fall speed and falling to an enemy
     const activateEnemy = () => {
-        const dropSpeed = Math.floor(Math.random() * -20);
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        const randomDropSpeed = dropSpeed + 170 - 7 * level;
-
+        const randomDropSpeed = 150 - 7 * level + (Math.floor(Math.random() * 20));
         setSpeed([...speed.slice(0, randomSpot), randomDropSpeed, ...speed.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
@@ -75,7 +73,6 @@ const EnemyGenerator = ({
 
 EnemyGenerator.propTypes = propTypes;
 EnemyGenerator.defaultProps = defaultProps;
-
 
 const WithReduxContainer = connect(({ game, enemies }) => ({
     gameOver: game.gameOver,

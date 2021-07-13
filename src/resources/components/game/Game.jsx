@@ -21,8 +21,9 @@ const propTypes = {
     pause: PropTypes.bool.isRequired,
     gameOver: PropTypes.bool.isRequired,
     playerHealth: PropTypes.number.isRequired,
-    pauseDisabled: PropTypes.bool.isRequired,
     pauseCount: PropTypes.number.isRequired,
+    pauseDisabled: PropTypes.bool.isRequired,
+
     className: AppPropTypes.className,
 };
 
@@ -61,8 +62,8 @@ const Game = ({
 }) => {
     // Increment level based on fixed time
     useEffect(() => {
-        incrementLevel(pause, gameOver);
-    }, []);
+        incrementLevel();
+    }, [gameOver]);
 
     // If the player is dead
     useEffect(() => {
@@ -123,9 +124,11 @@ Game.propTypes = propTypes;
 Game.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ game, player }) => ({
-    playerHealth: player.health,
-    gameOver: game.gameOver,
+    starting: game.starting,
     pause: game.pause,
+    gameOver: game.gameOver,
+    playerHealth: player.health,
+    level: game.level,
     pauseCount: game.pauseCount,
     pauseDisabled: game.pauseDisabled,
 }), () => ({}))(Game);
