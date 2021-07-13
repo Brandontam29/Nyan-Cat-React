@@ -10,3 +10,5 @@ export const findTrues = (array) => {
 
     return number;
 };
+
+export const sleep = (delay) => new Promise((func) => setTimeout(func, delay));

@@ -10,13 +10,7 @@ import toggleFullScreen from '../../lib/toggleFullScreen';
 import { moveRight, moveLeft } from '../../lib/playerMove';
 import incrementLevel from '../../lib/incrementLevel';
 import endGame from '../../lib/endGame';
-import startGame from '../../lib/startGame';
-
-import {
-    setPause as setPauseAction,
-    setPauseDisabled as setPauseDisabledAction,
-    setPauseCount as setPauseCountAction,
-} from '../../actions/gameActions';
+import pausePlay from '../../lib/pausePlay';
 
 import Canvas from './Canvas';
 import HealthBar from './HealthBar';
@@ -26,13 +20,9 @@ import styles from '../../styles/game/game.scss';
 const propTypes = {
     pause: PropTypes.bool.isRequired,
     gameOver: PropTypes.bool.isRequired,
-    level: PropTypes.number.isRequired,
     playerHealth: PropTypes.number.isRequired,
     pauseDisabled: PropTypes.bool.isRequired,
-    setPauseCount: PropTypes.func.isRequired,
     pauseCount: PropTypes.number.isRequired,
-    setPauseDisabled: PropTypes.func.isRequired,
-    setPause: PropTypes.func.isRequired,
     className: AppPropTypes.className,
 };
 
@@ -42,55 +32,36 @@ const defaultProps = {
 
 // All the game logic should be set here and children components will simply act depending on the data
 
+// Three main variables roles
+// PAUSE ROLE
+// player movement disabled (game & touchButtons)
+// enemy falling disabled
+// game button text
+// game button behavior
+// overlay text
+
+// GAME OVER ROLE
+// player movement disabled (game & touchButtons)
+// enemy falling disabled
+// enemyGenerator disabled
+// game button text
+// game button behavior
+// overlay text
+
+// STARTING ROLE
+// enemy reset to top
+
 const Game = ({
     pause,
     gameOver,
-    level,
     playerHealth,
-    setPause,
-    setPauseCount,
     pauseCount,
-    setPauseDisabled,
     pauseDisabled,
     className,
 }) => {
-    // pause affects
-    // player movement disabled (game & touchButtons)
-    // enemy falling disabled
-    // game button text
-    // game button behavior
-    // overlay text
-
-    // gameOver affects
-    // player movement disabled (game & touchButtons)
-    // enemy falling disabled
-    // enemyGenerator disabled
-    // game button text
-    // game button behavior
-    // overlay text
-
-    // starting affects
-    // enemy reset to top
-
-    const pausePlay = () => {
-        if (!gameOver) {
-            if (!pauseDisabled) {
-                if (!pause) {
-                    setPauseCount(pauseCount - 1);
-                }
-                if (pauseCount === 0) {
-                    setPauseDisabled(true);
-                }
-                return setPause(!pause);
-            }
-        }
-
-        return startGame();
-    };
-
     // Increment level based on fixed time
     useEffect(() => {
-        incrementLevel(level, pause, gameOver);
+        incrementLevel(pause, gameOver);
     }, []);
 
     // If the player is dead
@@ -111,9 +82,10 @@ const Game = ({
         return `Pause (${pauseCount})`;
     };
 
+    // Keyboard bindings
     useKeyPress('f', toggleFullScreen);
-    useKeyPress('a', pause || gameOver ? () => {} : moveLeft);
-    useKeyPress('d', pause || gameOver ? () => {} : moveRight);
+    useKeyPress('a', pause ? () => {} : moveLeft);
+    useKeyPress('d', pause ? () => {} : moveRight);
     useKeyPress(' ', pausePlay);
 
     return (
@@ -152,16 +124,10 @@ Game.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ game, player }) => ({
     playerHealth: player.health,
+    gameOver: game.gameOver,
     pause: game.pause,
     pauseCount: game.pauseCount,
-    starting: game.starting,
-    gameOver: game.gameOver,
-    level: game.level,
     pauseDisabled: game.pauseDisabled,
-}), (dispatch) => ({
-    setPauseCount: (value) => dispatch(setPauseCountAction(value)),
-    setPause: (value) => dispatch(setPauseAction(value)),
-    setPauseDisabled: (value) => dispatch(setPauseDisabledAction(value)),
-}))(Game);
+}), () => ({}))(Game);
 
 export default WithReduxContainer;

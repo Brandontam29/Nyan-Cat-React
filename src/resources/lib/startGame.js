@@ -8,14 +8,14 @@ import {
     setGameOver,
     setStarting,
 } from '../actions/gameActions';
-
 import { setPlayerHealth } from '../actions/playerActions';
+
+import { sleep } from './utils';
 
 import { STARTING_HEALTH } from './data';
 
 const store = configureStore;
 
-const sleep = (delay) => new Promise((func) => setTimeout(func, delay));
 // Creat loading animation
 const startGame = async () => {
     // Animation for 3 seconds
