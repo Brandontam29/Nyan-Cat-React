@@ -10,14 +10,10 @@ This project is as strictly front-end project built from scratch. It is mobile a
 ### Notable technologies ###
 React, Webpack, Sass
 
-#### React ####
-Well, React is "React". But, this game is built to have players easily adjust the parameters. For that to happen the app has to be structured smartly.
+### Performance ###
+This app has migrated heavily into Redux without compromising performance while increasing readability.
 
-#### Webpack ####
-The webpack configuration is completely custom built from scratch for this project. To name a few, it features code splitting, lazy loading, file compression, css optimization/injection.
-
-#### Sass/Css ####
-This is where the magic of responsiveness happens. With the custom webpack configuration it is possible to have injected Sass into component tags.
+Good read: https://reactrocket.com/post/react-redux-optimization/
 
 ### Note on game development ###
 I know this game does not particularly call for game UX/UI design, but that has always peeked my interest as I have worked as a play tester.
