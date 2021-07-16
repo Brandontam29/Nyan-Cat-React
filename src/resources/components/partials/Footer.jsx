@@ -23,7 +23,7 @@ const Footer = ({ className }) => (
             },
         ])}
     >
-        <div />
+        <div>Footer</div>
     </footer>
 );
 

@@ -17,6 +17,9 @@ const playerReducer = (state = initialState, action) => {
         };
     }
     case SET_PLAYER_HEALTH: {
+        if (action.payload < 0) {
+            return state;
+        }
         return {
             ...state,
             health: action.payload,

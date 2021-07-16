@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
-import { GAME_WIDTH } from '../../lib/data';
+import { GAME_WIDTH, LEVEL_UP_DELAY } from '../../lib/data';
 import useKeyPress from '../../hooks/useKeyPress';
 import toggleFullScreen from '../../lib/toggleFullScreen';
 import { moveRight, moveLeft } from '../../lib/playerMove';
@@ -18,6 +18,7 @@ import styles from '../../styles/game/game.scss';
 // import resetGame from '../../lib/resetGame';
 
 const propTypes = {
+    level: PropTypes.number.isRequired,
     pause: PropTypes.bool.isRequired,
     gameOver: PropTypes.bool.isRequired,
     playerHealth: PropTypes.number.isRequired,
@@ -53,6 +54,7 @@ const defaultProps = {
 // enemy reset to top
 
 const Game = ({
+    level,
     pause,
     gameOver,
     playerHealth,
@@ -62,8 +64,13 @@ const Game = ({
 }) => {
     // Increment level based on fixed time
     useEffect(() => {
-        incrementLevel();
-    }, [gameOver]);
+        let id = 0;
+        if (!pause && !gameOver) {
+            id = setTimeout(() => incrementLevel(), LEVEL_UP_DELAY * 1000);
+            return () => clearTimeout(id);
+        }
+        return () => clearTimeout(id);
+    }, [level, pause, gameOver]);
 
     // If the player is dead
     useEffect(() => {
@@ -124,6 +131,7 @@ Game.propTypes = propTypes;
 Game.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ game, player }) => ({
+    game: game.level,
     starting: game.starting,
     pause: game.pause,
     gameOver: game.gameOver,

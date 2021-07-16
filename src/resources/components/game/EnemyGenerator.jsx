@@ -33,25 +33,34 @@ const EnemyGenerator = ({
     setEnemiesStatus,
     level,
 }) => {
-    const [speed, setSpeed] = useState(new Array(GAME_COLUMNS).fill(150));
+    const [speedArray, setSpeedArray] = useState(new Array(GAME_COLUMNS).fill(150));
 
     // Assign fall speed and falling to an enemy
     const activateEnemy = () => {
         const randomSpot = Math.floor(Math.random() * GAME_COLUMNS);
-        let randomDropSpeed = 160;
-        if (level < 6) {
-            randomDropSpeed = 150 + 6 * level + (Math.floor(Math.random() * 20));
-        } else if (level < 11) {
-            randomDropSpeed = 150 + 5 * level + (Math.floor(Math.random() * 20));
-        } else if (level < 28) {
-            randomDropSpeed = 150 + 4 * level + (Math.floor(Math.random() * 20));
-        } else if (level < 60) {
-            randomDropSpeed = 150 + 3 * level + (Math.floor(Math.random() * 20));
+        let speed = 400;
+
+        // Negative linear function for each level
+        if (level < 25) {
+            speed = 400 - 6 * level;
+        } else if (level < 45) {
+            speed = 375 - 5 * level;
+        } else if (level < 55) {
+            speed = 375 - 5 * level;
+        } else if (level < 70) {
+            speed = Math.floor(228.333 - 2.333 * level);
+        } else if (level < 85) {
+            speed = Math.floor(181.666 - 1.666 * level);
         } else {
-            randomDropSpeed = 150 + 2 * level + (Math.floor(Math.random() * 20));
+            speed = Math.floor(96.666 - 0.666 * level);
         }
 
-        setSpeed([...speed.slice(0, randomSpot), randomDropSpeed, ...speed.slice(randomSpot + 1)]);
+        // +/- around 4.5% of the current speed
+        const random = Math.floor(Math.random() * Math.floor(speed / 21) - Math.floor(speed / 42));
+
+        const randomSpeed = speed + random;
+
+        setSpeedArray([...speedArray.slice(0, randomSpot), randomSpeed, ...speedArray.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
 
@@ -72,7 +81,7 @@ const EnemyGenerator = ({
                 <Enemy
                     falling={enemiesStatus[i]}
                     spot={i}
-                    dropSpeed={speed[i]}
+                    dropSpeed={speedArray[i]}
                     className={styles.enemy}
                 />,
             );

@@ -2,12 +2,10 @@
 @import '../commons/placeholders';
 
 .container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-
     .header {
         @extend %page-inner;
 
+        margin-top: 20px;
         margin-bottom: 20px;
     }
 
@@ -17,12 +15,18 @@
         margin-bottom: 20px;
     }
 
-    @media #{$mq-small-screen} {
-        margin-top: 50px;
-        margin-bottom: 50px;
+    .footer {
+        margin-bottom: 20px;
+    }
 
+    @media #{$mq-small-screen} {
         .header {
+            margin-top: 50px;
             margin-bottom: 30px;
+        }
+
+        .footer {
+            margin-bottom: 50px;
         }
     }
 }
