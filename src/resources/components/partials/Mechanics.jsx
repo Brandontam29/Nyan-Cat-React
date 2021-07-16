@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,6 @@ const defaultProps = {
 };
 
 const Mechanics = ({ className }) => {
-    
     return (
         <div
             className={classNames([
@@ -31,12 +30,49 @@ const Mechanics = ({ className }) => {
                 Mechanics
             </h3>
 
-            
-            <button
+            <div className={styles.parameter}>
+                <h4>
+                    Columns
+                </h4>
+                <div>
+                    <button
+                        value="+"
+                        label="plus"
+                        type="button"
+                        onClick={() => {}}
+                        className={styles.button}
+                    />
+                    <button
+                        value="-"
+                        label="minus"
+                        type="button"
+                        onClick={() => {}}
+                        className={styles.button}
+                    />
+                </div>
+            </div>
+
+            <div className={styles.parameter}>
+                <h4>
+                    Height
+                </h4>
+            </div>
+            <div className={styles.parameter}>
+                <h4>
+                    Health
+                </h4>
+
+            </div>
+            <div className={styles.parameter}>
+                <h4>
+                    Speed
+                </h4>
+            </div>
+            {/* <button
                 type="button"
                 onClick={}
                 className={styles.button}
-            />
+            /> */}
 
         </div>
     );

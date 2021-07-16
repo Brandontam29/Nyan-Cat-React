@@ -18,6 +18,7 @@ import styles from '../../styles/game/game.scss';
 // import resetGame from '../../lib/resetGame';
 
 const propTypes = {
+    starting: PropTypes.bool.isRequired,
     level: PropTypes.number.isRequired,
     pause: PropTypes.bool.isRequired,
     gameOver: PropTypes.bool.isRequired,
@@ -54,6 +55,7 @@ const defaultProps = {
 // enemy reset to top
 
 const Game = ({
+    starting,
     level,
     pause,
     gameOver,
@@ -81,6 +83,9 @@ const Game = ({
 
     // Button text logic
     const buttonText = () => {
+        if (starting) {
+            return 'Starting';
+        }
         if (gameOver) {
             return 'Play Again?';
         }
@@ -92,9 +97,16 @@ const Game = ({
 
     // Keyboard bindings
     useKeyPress('f', toggleFullScreen);
+    useKeyPress('s', () => {});
     useKeyPress('a', pause ? () => {} : moveLeft);
     useKeyPress('d', pause ? () => {} : moveRight);
-    useKeyPress(' ', pausePlay);
+    useKeyPress('p', pausePlay);
+
+    // Account for capslock on
+    useKeyPress('F', toggleFullScreen);
+    useKeyPress('A', pause ? () => {} : moveLeft);
+    useKeyPress('D', pause ? () => {} : moveRight);
+    useKeyPress('P', pausePlay);
 
     return (
         <section
@@ -116,7 +128,7 @@ const Game = ({
                 <button
                     type="button"
                     onClick={pausePlay}
-                    disabled={pauseDisabled && !gameOver}
+                    disabled={pauseDisabled}
                     className={styles.pauseButton}
                 >
                     {buttonText()}

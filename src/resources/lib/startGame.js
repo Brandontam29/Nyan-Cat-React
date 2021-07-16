@@ -19,6 +19,7 @@ const store = configureStore;
 // Creat loading animation
 const startGame = async () => {
     // Animation for 3 seconds
+    store.dispatch(setPauseDisabled(true));
     store.dispatch(setStarting(true));
     await sleep(3000);
     await store.dispatch(setStarting(false));

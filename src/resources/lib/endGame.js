@@ -12,7 +12,7 @@ const endGame = () => {
     batch(() => {
         store.dispatch(setGameOver(true));
         store.dispatch(setPause(false));
-        store.dispatch(setPauseDisabled(true));
+        store.dispatch(setPauseDisabled(false));
         store.dispatch(setPauseCount(0));
     });
 };

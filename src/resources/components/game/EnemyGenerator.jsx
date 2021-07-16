@@ -60,6 +60,7 @@ const EnemyGenerator = ({
 
         const randomSpeed = speed + random;
 
+        // sleep(4000);
         setSpeedArray([...speedArray.slice(0, randomSpot), randomSpeed, ...speedArray.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
