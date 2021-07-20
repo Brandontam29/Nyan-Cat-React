@@ -11,6 +11,7 @@ import { moveRight, moveLeft } from '../../lib/playerMove';
 import incrementLevel from '../../lib/incrementLevel';
 import endGame from '../../lib/endGame';
 import pausePlay from '../../lib/pausePlay';
+import dropEnemies from '../../lib/dropEnemies';
 
 import Canvas from './Canvas';
 import HealthBar from './HealthBar';
@@ -97,7 +98,7 @@ const Game = ({
 
     // Keyboard bindings
     useKeyPress('f', toggleFullScreen);
-    useKeyPress('s', () => {});
+    useKeyPress('s', dropEnemies);
     useKeyPress('a', pause ? () => {} : moveLeft);
     useKeyPress('d', pause ? () => {} : moveRight);
     useKeyPress('p', pausePlay);

@@ -1,16 +1,16 @@
 /* eslint-disable no-bitwise */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import * as AppPropTypes from '../../lib/PropTypes';
 import {
-    MAX_ENEMIES, GAME_COLUMNS,
+    MAX_ENEMIES, GAME_COLUMNS, DROP_SPEED,
 } from '../../lib/data';
 
 import {
     setEnemiesStatus as setEnemiesStatusAction,
+    setDrop as setDropAction,
 } from '../../actions/enemiesActions';
 import { findTrues } from '../../lib/utils';
 import Enemy from './Enemy';
@@ -18,6 +18,8 @@ import Enemy from './Enemy';
 import styles from '../../styles/game/enemy-generator.scss';
 
 const propTypes = {
+    drop: PropTypes.bool,
+    setDrop: PropTypes.func.isRequired,
     gameOver: PropTypes.bool.isRequired,
     enemiesStatus: AppPropTypes.enemyStatus.isRequired,
     setEnemiesStatus: PropTypes.func.isRequired,
@@ -25,9 +27,12 @@ const propTypes = {
 };
 
 const defaultProps = {
+    drop: false,
 };
 
 const EnemyGenerator = ({
+    drop,
+    setDrop,
     gameOver,
     enemiesStatus,
     setEnemiesStatus,
@@ -59,8 +64,6 @@ const EnemyGenerator = ({
         const random = Math.floor(Math.random() * Math.floor(speed / 21) - Math.floor(speed / 42));
 
         const randomSpeed = speed + random;
-
-        // sleep(4000);
         setSpeedArray([...speedArray.slice(0, randomSpot), randomSpeed, ...speedArray.slice(randomSpot + 1)]);
         return setEnemiesStatus({ spot: randomSpot, falling: true });
     };
@@ -73,6 +76,19 @@ const EnemyGenerator = ({
             activateEnemy();
         }
     }, [enemiesStatus, gameOver]);
+
+    // When dropEnemies is called, assign a fast speed to all enemies
+    // Resets on the next wave of enemies
+    const dropAllEnemies = (callback) => {
+        setSpeedArray(new Array(GAME_COLUMNS).fill(DROP_SPEED));
+        return callback;
+    };
+
+    useEffect(() => {
+        if (drop) {
+            dropAllEnemies(setDrop(false));
+        }
+    }, [drop]);
 
     // Creates the the necessary enemies once
     const createEnemies = () => {
@@ -97,11 +113,13 @@ EnemyGenerator.propTypes = propTypes;
 EnemyGenerator.defaultProps = defaultProps;
 
 const WithReduxContainer = connect(({ game, enemies }) => ({
+    drop: enemies.drop,
     gameOver: game.gameOver,
     level: game.level,
     enemiesStatus: enemies.enemiesStatus,
 }), (dispatch) => ({
     setEnemiesStatus: (value) => dispatch(setEnemiesStatusAction(value)),
+    setDrop: (value) => dispatch(setDropAction(value)),
 }))(EnemyGenerator);
 
 export default WithReduxContainer;

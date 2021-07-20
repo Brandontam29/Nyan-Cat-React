@@ -35,7 +35,8 @@ const Header = ({ className }) => (
             <h2>How to Play</h2>
             <ul>
                 <li>Move: A and D</li>
-                <li>Pause/Play: Space</li>
+                <li>Drop: S</li>
+                <li>Pause/Play: P</li>
                 <li>Fullscreen: F</li>
             </ul>
         </div>

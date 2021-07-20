@@ -7,7 +7,9 @@ import * as AppPropTypes from '../../lib/PropTypes';
 import {
     ENEMY_HEIGHT, GAME_HEIGHT, PLAYER_HEIGHT, GAME_COLUMNS,
 } from '../../lib/data';
-import { setEnemiesStatus as setEnemiesStatusAction } from '../../actions/enemiesActions';
+import {
+    setEnemiesStatus as setEnemiesStatusAction,
+} from '../../actions/enemiesActions';
 import { setPlayerHealth as setPlayerHealthAction } from '../../actions/playerActions';
 
 import enemyImage from '../../images/enemy.png';
@@ -62,13 +64,15 @@ const Enemy = ({
                 setTouched(true);
                 setPlayerHealth(playerHealth - 1);
             }
+
             id = setTimeout(() => setTop(top + 50), dropSpeed);
             return () => clearTimeout(id);
         }
 
-        // position reset
+        // position reset when reached the bottom
         if (falling && !pause) {
             setEnemiesStatus({ spot, falling: false });
+
             setTouched(false);
             setTop(-ENEMY_HEIGHT);
         }

@@ -1,8 +1,9 @@
-import { SET_ENEMIES_STATUS } from '../actions/enemiesActions';
+import { SET_ENEMIES_STATUS, SET_DROP } from '../actions/enemiesActions';
 import { GAME_COLUMNS } from '../lib/data';
 
 const initialState = {
     enemiesStatus: new Array(GAME_COLUMNS).fill(false),
+    drop: false,
 };
 
 const enemiesReducer = (state = initialState, action) => {
@@ -15,6 +16,13 @@ const enemiesReducer = (state = initialState, action) => {
         return {
             ...state,
             enemiesStatus: newArray,
+        };
+    }
+
+    case SET_DROP: {
+        return {
+            ...state,
+            drop: action.payload,
         };
     }
     default:
