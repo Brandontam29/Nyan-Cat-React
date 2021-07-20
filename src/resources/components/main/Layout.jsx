@@ -6,7 +6,7 @@ import * as AppPropTypes from '../../lib/PropTypes';
 
 import Header from '../partials/Header';
 import Game from '../game/Game';
-import Footer from '../partials/Footer';
+// import Footer from '../partials/Footer';
 
 import styles from '../../styles/main/layout.scss';
 
@@ -30,7 +30,7 @@ const Layout = ({ className }) => {
         >
             <Header className={styles.header} />
             <Game className={styles.game} />
-            <Footer className={styles.footer} />
+            {/* <Footer className={styles.footer} /> */}
         </div>
     );
 };
